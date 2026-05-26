@@ -8,56 +8,133 @@ function Footer({ onDownload }) {
       <div className="footer-cta-wrapper">
         <div className="footer-cta-banner">
 
-          {/* Left */}
+          {/* Left Content */}
           <div className="footer-cta-left">
             <h2 className="footer-cta-heading">
               Download the 2gather<br />App Today for Free!
             </h2>
             <p className="footer-cta-sub">
-              Join a community of&nbsp; listeners and discover your next podcast!
+              Join a community of gatherers and discover your next hangout!
             </p>
-            <button className="footer-cta-btn" onClick={onDownload}>
-              Download App
-            </button>
-          </div>
-
-          {/* Right – app mockup */}
-          <div className="footer-cta-right">
-            <div className="footer-mockup-card">
-              {/* Tab row */}
-              <div className="mockup-tab-row">
-                <button className="mockup-tab mockup-tab--active">Quick join</button>
-                <button className="mockup-tab">All events</button>
-              </div>
-
-              {/* Event card 1 */}
-              <div className="mockup-event-card">
-                <div className="mockup-avatar mockup-avatar--sarah" />
-                <div className="mockup-event-meta">
-                  <span className="mockup-username">Sarah Mitchell</span>
-                  <span className="mockup-time">2 hours ago</span>
-                </div>
-                <div className="mockup-event-body">
-                  <strong>Morning Yoga in Golden Gate Park</strong>
-                  <p>Looking for 3–4 people to join morning yoga session. All levels welcome! Let's start the day with positive energy.</p>
-                  <div className="mockup-event-stats">
-                    <span>🕗 Tomorrow, 7:00 AM</span>
-                    <span>👤 0/5 joined</span>
+            <div className="footer-cta-store-badges">
+              {/* App Store Badge */}
+              <a href="#" className="store-badge-link" aria-label="Download on the App Store" onClick={(e) => { e.preventDefault(); onDownload(); }}>
+                <div className="store-badge app-store">
+                  <svg className="store-badge-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.57 2.95-1.39z"/>
+                  </svg>
+                  <div className="store-badge-text">
+                    <span className="badge-micro">Download on the</span>
+                    <span className="badge-main">App Store</span>
                   </div>
-                  <button className="mockup-join-btn">Join Activity</button>
                 </div>
-              </div>
+              </a>
 
-              {/* Event card 2 – partial */}
-              <div className="mockup-event-card mockup-event-card--partial">
-                <div className="mockup-avatar mockup-avatar--yogi" />
-                <div className="mockup-event-meta">
-                  <span className="mockup-username">Yogi Adityanath</span>
-                  <span className="mockup-time">2 hours ago</span>
+              {/* Google Play Badge */}
+              <a href="#" className="store-badge-link" aria-label="Get it on Google Play" onClick={(e) => { e.preventDefault(); onDownload(); }}>
+                <div className="store-badge google-play">
+                  <svg className="store-badge-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 5.27v13.46c0 .88.75 1.54 1.6 1.34l12.7-7.39c.6-.35.6-.96 0-1.31L4.6 3.93C3.75 3.73 3 4.39 3 5.27z"/>
+                    <path d="M17.3 12L4.6 19.4c-.6.35-1 .12-1-.5V12.5L17.3 12z" opacity="0.15"/>
+                    <path d="M17.3 12L3.6 4.6c-.6-.35-1-.12-1 .5V11.5L17.3 12z" opacity="0.15"/>
+                  </svg>
+                  <div className="store-badge-text">
+                    <span className="badge-micro">GET IT ON</span>
+                    <span className="badge-main">Google Play</span>
+                  </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
+
+          {/* Right – High-fidelity interactive app mockup */}
+          <div className="footer-cta-right">
+            <div className="footer-mockup-card">
+              {/* Phone Speaker & Camera Bezel Decor */}
+              <div className="mockup-bezel-header">
+                <div className="mockup-camera" />
+                <div className="mockup-speaker" />
+              </div>
+
+              {/* Tab row matching screenshot */}
+              <div className="mockup-tab-row">
+                <button className="mockup-tab mockup-tab--inactive">Quick join</button>
+                <button className="mockup-tab mockup-tab--active-orange">All events</button>
+              </div>
+
+              {/* Filter pills row */}
+              <div className="mockup-pills-row">
+                <span className="mockup-pill mockup-pill--active">Recent</span>
+                <span className="mockup-pill">My events</span>
+                <span className="mockup-pill">Upcoming</span>
+              </div>
+
+              {/* Event card 1 - Gym Workout Session */}
+              <div className="mockup-event-card">
+                <div className="mockup-event-content-grid">
+                  <div className="mockup-event-img-wrap">
+                    <img src="/adventure_banner.png" alt="Gym Workout" className="mockup-event-image" />
+                    <span className="mockup-event-category-tag">Music</span>
+                  </div>
+                  <div className="mockup-event-details">
+                    <h4 className="mockup-event-title">Gym Workout Session</h4>
+                    <p className="mockup-event-host">Hosted by TataBhai.inc</p>
+                    <div className="mockup-event-time-location">
+                      <span>🕒 March 15, 9:00 AM</span>
+                      <span>📍 Innovation centre</span>
+                    </div>
+                    <div className="mockup-event-footer-row">
+                      <span className="mockup-event-joined">👥 1/50 joined</span>
+                    </div>
+                  </div>
+                  <button className="mockup-event-join-action-btn">Join</button>
+                </div>
+              </div>
+
+              {/* Event card 2 - Chess Local League */}
+              <div className="mockup-event-card">
+                <div className="mockup-event-content-grid">
+                  <div className="mockup-event-img-wrap">
+                    <img src="/creative_banner.png" alt="Chess Local League" className="mockup-event-image" />
+                    <span className="mockup-event-category-tag bg-orange">Music</span>
+                  </div>
+                  <div className="mockup-event-details">
+                    <h4 className="mockup-event-title">Chess Local League</h4>
+                    <p className="mockup-event-host">Hosted by TataBhai.inc</p>
+                    <div className="mockup-event-time-location">
+                      <span>🕒 March 15, 9:00 AM</span>
+                      <span>📍 Innovation centre</span>
+                    </div>
+                    <div className="mockup-event-footer-row">
+                      <span className="mockup-event-joined">👥 1/50 joined</span>
+                    </div>
+                  </div>
+                  <button className="mockup-event-join-action-btn">Join</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Slanted Slogan Hero Section ── */}
+      <div className="footer-slanted-hero">
+        <div className="footer-slanted-content">
+          <div className="footer-slanted-brand">
+            <div className="footer-slanted-logo-box">
+              <img 
+                src="/logo_dark.png" 
+                alt="2gather Logo" 
+                style={{ width: '28px', height: '28px', objectFit: 'contain' }} 
+              />
+            </div>
+            <span className="footer-slanted-brand-text">2gather</span>
+          </div>
+          <h2 className="footer-slanted-heading">
+            <span className="slogan-cursive">Reinventing</span>
+            <span className="slogan-bold">community for a new generation</span>
+          </h2>
         </div>
       </div>
 
@@ -67,21 +144,11 @@ function Footer({ onDownload }) {
         {/* Brand col */}
         <div className="footer-brand-col">
           <div className="footer-logo">
-            {/* Snowflake-style icon */}
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="16" y1="2"  x2="16" y2="30" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-              <line x1="2"  y1="16" x2="30" y2="16" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-              <line x1="5.4" y1="5.4" x2="26.6" y2="26.6" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-              <line x1="26.6" y1="5.4" x2="5.4" y2="26.6" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
-              <circle cx="16" cy="2"  r="1.5" fill="white"/>
-              <circle cx="16" cy="30" r="1.5" fill="white"/>
-              <circle cx="2"  cy="16" r="1.5" fill="white"/>
-              <circle cx="30" cy="16" r="1.5" fill="white"/>
-              <circle cx="5.4"  cy="5.4"  r="1.5" fill="white"/>
-              <circle cx="26.6" cy="26.6" r="1.5" fill="white"/>
-              <circle cx="26.6" cy="5.4"  r="1.5" fill="white"/>
-              <circle cx="5.4"  cy="26.6" r="1.5" fill="white"/>
-            </svg>
+            <img 
+              src="/logo_dark.png" 
+              alt="2gather Logo" 
+              style={{ width: '32px', height: '32px', objectFit: 'contain' }} 
+            />
             <span className="footer-logo-text">2gather</span>
           </div>
           <p className="footer-tagline">Your life, your vibe, your people. All in real life.</p>

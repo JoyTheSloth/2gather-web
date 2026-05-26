@@ -1,0 +1,31 @@
+/* ─── ScrollReveal Text Component Styles ─── */
+
+.scroll-reveal-container {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.scroll-reveal-text-span {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.45rem, 3.2vw, 2.3rem); /* Perfect fluid response sizing */
+  line-height: 1.65;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+  display: block;
+  text-align: left;
+}
+
+/* Specific styling for staggered words */
+.scroll-reveal-text-span .word {
+  margin-right: 0.28em; /* Clean spacing between animated words */
+  display: inline-block;
+  will-change: opacity, filter;
+}
+
+/* Light theme support */
+.light .scroll-reveal-text-span {
+  color: #0f172a;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.95), 0 0 4px rgba(255, 255, 255, 0.85); /* Ensures readable high-contrast dark text on bright clear photo slides! */
+}

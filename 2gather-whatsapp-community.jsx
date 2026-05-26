@@ -612,18 +612,7 @@ export default function WhatsAppCommunityPage({ onClose, hideHeader, hideTicker 
           </div>
         </div>
 
-        {/* FOOTER */}
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", padding: "24px 40px", display: "flex", justifyContent: "space-between", alignItems: "center", position: "relative", zIndex: 5, flexWrap: "wrap", gap: 12 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <StarBurst size={10} />
-            <span style={{ fontFamily: "'Lufga', sans-serif", fontWeight: 800, fontSize: 15, color: "rgba(255,255,255,0.5)" }}>2gather</span>
-          </div>
-          <span style={{ color: "rgba(255,255,255,0.2)", fontFamily: "'Lufga', sans-serif", fontSize: 13 }}>© 2025 2gather · Where Vibes Belong</span>
-          <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-            <a href="https://www.2gather.in" target="_blank" rel="noreferrer" style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'Lufga', sans-serif", fontSize: 13, textDecoration: "none" }}>Website</a>
-            <a href="https://www.2gather.in/community-guidelines" target="_blank" rel="noreferrer" style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'Lufga', sans-serif", fontSize: 13, textDecoration: "none" }}>Guidelines</a>
-          </div>
-        </div>
+
 
       </div>
     </>

@@ -1,0 +1,174 @@
+/* ─── ThreeDSlider Premium Vanilla CSS Styles ─── */
+
+.three-d-slider-container {
+  position: relative;
+  width: 100vw; /* Stretches 100% of the viewport width */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 70vh; /* Premium viewport height allocation */
+  overflow: hidden; /* Hide cards only at the absolute edges of the screen to prevent scrollbars */
+  background-color: transparent; /* Seamless blend with About Us page dark backdrop */
+  margin-top: 40px;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.three-d-slider-relative-wrap {
+  position: relative;
+  z-index: 10;
+  height: 55vh;
+  overflow: visible; /* Cards move freely edge-to-edge across the screen! */
+  pointer-events: none;
+  width: 100%;
+}
+
+/* SliderItem container styling */
+.slider-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65), 0 0 35px rgba(59, 130, 246, 0.08);
+  background-color: #000;
+  transform-origin: 0% 100%;
+  pointer-events: auto;
+  width: var(--width);
+  height: var(--height);
+  margin-top: calc(-1 * var(--height) / 2);
+  margin-left: calc(-1 * var(--width) / 2);
+  overflow: hidden;
+  will-change: transform;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slider-item:hover {
+  border-color: rgba(59, 130, 246, 0.55);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 45px rgba(59, 130, 246, 0.25);
+}
+
+.slider-item-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.slider-item-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.75) 100%);
+}
+
+.slider-item-title {
+  position: absolute;
+  z-index: 20;
+  color: #fff;
+  bottom: 24px;
+  left: 20px;
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.slider-item-number {
+  position: absolute;
+  z-index: 20;
+  color: rgba(255, 255, 255, 0.9);
+  top: 15px;
+  left: 20px;
+  font-size: clamp(36px, 8vw, 72px);
+  font-weight: 900;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.04em;
+  opacity: 0.95;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.slider-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Static layout guidelines text & lines - Fully Clean and Borderless */
+.three-d-slider-static-layout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.three-d-slider-static-line {
+  display: none; /* Removed vertical guide border lines to make section completely borderless! */
+}
+
+.three-d-slider-static-text {
+  position: absolute;
+  bottom: 50px;
+  left: calc(50vw - 450px); /* Positioned relative to edge-to-edge screen */
+  color: rgba(255, 255, 255, 0.2);
+  transform: rotate(-90deg);
+  transform-origin: 0% 100%;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@media (max-width: 1024px) {
+  .three-d-slider-static-text {
+    left: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .three-d-slider-container {
+    height: 60vh;
+    margin: 30px 0;
+  }
+  .three-d-slider-relative-wrap {
+    height: 48vh;
+  }
+  .three-d-slider-static-text {
+    left: 16px;
+    bottom: 20px;
+  }
+}
+
+/* ─── Light Theme 3D Slider Adjustments ─── */
+.light .three-d-slider-static-text {
+  color: rgba(15, 23, 42, 0.25);
+}
+
+.light .slider-item {
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.2), 0 0 35px rgba(59, 130, 246, 0.03);
+}
+
+.light .slider-item:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.3), 0 0 45px rgba(59, 130, 246, 0.15);
+}
