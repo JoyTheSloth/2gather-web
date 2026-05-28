@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
    STYLES
    ───────────────────────────────────────────────────────── */
 const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@600;700&family=Outfit:wght@800;900&display=swap');
 
   * { box-sizing: border-box; }
 
@@ -26,9 +26,8 @@ const CSS = `
   }
 
   .bk-title-above {
-    font-family: 'Caveat', cursive;
-    font-size: 3.5rem;
-    font-weight: 700;
+    font-family: 'Outfit', 'Inter', sans-serif;
+    font-size: 2.8rem;
     margin-top: 0;
     margin-bottom: 28px;
     text-align: center;
@@ -36,18 +35,41 @@ const CSS = `
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
     transition: all 0.3s ease;
+    text-transform: none; /* Keep natural case for cursive flow */
   }
 
-  .bk-wrap.dark .bk-title-above {
-    color: #FDE047;
-    text-shadow: 0 0 15px rgba(253, 224, 71, 0.4);
+  .bk-title-above .slogan-cursive {
+    font-family: 'Caveat', cursive;
+    font-size: 4.2rem;
+    font-weight: 700;
+    display: inline-block;
+    transform: rotate(-3deg);
+    margin-right: 4px;
   }
 
-  .bk-wrap.light .bk-title-above {
+  .bk-title-above .slogan-bold {
+    font-weight: 900;
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
+
+  .bk-wrap.dark .bk-title-above .slogan-cursive {
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+  }
+
+  .bk-wrap.dark .bk-title-above .slogan-bold {
+    color: #ffffff;
+  }
+
+  .bk-wrap.light .bk-title-above .slogan-cursive {
     color: #5B31CC;
     text-shadow: 0 0 15px rgba(91, 49, 204, 0.15);
+  }
+
+  .bk-wrap.light .bk-title-above .slogan-bold {
+    color: #1a0933;
   }
 
   @media (max-width: 768px) {
@@ -1161,80 +1183,349 @@ function Slide5() {
 /* ─── Slide 6: Unified Calendar ─── */
 function Slide6() {
   return (
-    <div className="slide-container">
+    <div className="slide-container" style={{ width: '100%', height: '100%' }}>
       {/* ── LEFT PAGE ── */}
-      <div className="bk-left">
+      <div className="bk-left" style={{ overflow: 'hidden', position: 'relative' }}>
         <div className="bk-page-num">
           <div className="num">06</div>
-          <div className="of">of 07</div>
+          <div className="of">of 08</div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '24px' }}>
-          <img src="/Color%20Logo.png" alt="2gather Logo" style={{ height: '36px', objectFit: 'contain' }} />
+        {/* Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '20px' }}>
+          <img src="/Color%20Logo.png" alt="2gather Logo" style={{ height: '32px', objectFit: 'contain' }} />
         </div>
 
-        <div style={{ padding: '20px 28px 0', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '6px', position: 'relative' }}>
-          <div style={{ position: 'relative', alignSelf: 'flex-start', marginLeft: '16px' }}>
-            <div className="bk-bubble-top" style={{ background: '#3b82f6' }}>Weekly</div>
-            <div className="bk-smiley" style={{ background: '#3b82f6', color: 'white' }}>📅</div>
+        {/* Header Badges */}
+        <div style={{ padding: '20px 28px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', position: 'relative' }}>
+          {/* ⭐ Star */}
+          <div style={{
+            position: 'absolute',
+            top: '42px',
+            left: '32px',
+            fontSize: '1.6rem',
+            zIndex: 5,
+            transform: 'rotate(-15deg)',
+            filter: 'drop-shadow(2px 2px 0px #000)'
+          }}>⭐</div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%', alignItems: 'center', position: 'relative' }}>
+            {/* "Weekly" Badge */}
+            <div style={{
+              background: '#0084FF',
+              color: '#FFFFFF',
+              border: '3px solid #000000',
+              borderRadius: '35px',
+              padding: '6px 20px',
+              boxShadow: '4px 4px 0px #000000',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 900,
+              fontSize: '1.45rem',
+              lineHeight: 1
+            }}>
+              Weekly
+              <div style={{
+                background: '#FFFFFF',
+                border: '2px solid #000000',
+                borderRadius: '8px',
+                width: '24px',
+                height: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '0.85rem',
+                boxShadow: '1.5px 1.5px 0 #000'
+              }}>📅</div>
+            </div>
+
+            {/* "Mixers" Badge */}
+            <div style={{
+              background: '#7B55E8',
+              color: '#FFFFFF',
+              border: '3px solid #000000',
+              borderRadius: '35px',
+              padding: '8px 28px',
+              boxShadow: '4px 4px 0px #000000',
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 900,
+              fontSize: '2.1rem',
+              lineHeight: 1,
+              marginTop: '-2px',
+              position: 'relative'
+            }}>
+              Mixers
+            </div>
           </div>
-          <div className="bk-bubble-bottom" style={{ fontSize: '3.6rem', background: '#8b5cf6', padding: '10px 32px' }}>Mixers</div>
+
+          {/* Subtitle */}
+          <p style={{
+            fontFamily: "'Nunito', sans-serif",
+            fontSize: '0.82rem',
+            fontWeight: 800,
+            color: '#000000',
+            margin: '12px 0 0 0',
+            textAlign: 'center'
+          }}>
+            Great people. <span style={{ color: '#7B55E8' }}>Good vibes.</span> Unforgettable weekends.
+          </p>
         </div>
 
-        <div style={{ padding: '14px 24px 0', position: 'relative' }}>
-          <div className="bk-tape" style={{ top: 12, left: 10, transform: 'rotate(-5deg)' }} />
-          <div className="bk-polaroid">
-            <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=900&auto=format&fit=crop" alt="social event" style={{ height: '210px' }} />
+        {/* Polaroid Area */}
+        <div style={{ padding: '14px 24px 0', position: 'relative', display: 'flex', justifyContent: 'center' }}>
+          <div className="bk-tape" style={{ top: -4, left: 85, transform: 'rotate(-5deg)', zIndex: 10, background: 'rgba(236, 72, 153, 0.4)' }} />
+          <div className="bk-polaroid" style={{ transform: 'rotate(-4deg)', boxShadow: '4px 4px 0px #000', border: '2.5px solid #000', background: '#FFFFFF', padding: '12px 12px 28px 12px' }}>
+            <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=900&auto=format&fit=crop" alt="social event" style={{ height: '170px', width: '220px', objectFit: 'cover' }} />
           </div>
-          <div className="bk-sticky" style={{ bottom: -20, left: 40 }}>
-            Never a dull weekend in the city!
+          
+          {/* Cursive Sticker Tape */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-12px',
+            left: '48px',
+            background: '#FDE047',
+            border: '2.5px solid #000000',
+            padding: '6px 14px',
+            boxShadow: '3px 3px 0px #000000',
+            transform: 'rotate(-2deg)',
+            fontFamily: "'Caveat', cursive",
+            fontWeight: 800,
+            fontSize: '1.15rem',
+            color: '#3115A5',
+            zIndex: 10,
+            whiteSpace: 'nowrap'
+          }}>
+            Never a dull weekend in the city! 💜
+          </div>
+
+          {/* 😍 Sticker */}
+          <div style={{
+            position: 'absolute',
+            bottom: '20px',
+            right: '42px',
+            background: '#7B55E8',
+            border: '2px solid #000',
+            borderRadius: '10px',
+            width: '26px',
+            height: '26px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '2px 2px 0px #000',
+            fontSize: '0.85rem',
+            zIndex: 12,
+            transform: 'rotate(12deg)'
+          }}>😍</div>
+
+          {/* Popper sticker */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-22px',
+            right: '48px',
+            fontSize: '2.5rem',
+            zIndex: 10,
+            transform: 'rotate(-20deg) scaleX(-1)',
+            filter: 'drop-shadow(2px 2px 0px rgba(0,0,0,0.15))'
+          }}>
+            🎉
           </div>
         </div>
       </div>
 
       {/* ── RIGHT PAGE ── */}
-      <div className="bk-right">
-        <div className="bk-right-content">
-          <div style={{ position: 'absolute', top: 20, right: 60, fontSize: '1.8rem' }}>📅</div>
+      <div className="bk-right" style={{ overflow: 'hidden' }}>
+        <div className="bk-right-content" style={{ padding: '0', justifyContent: 'center', display: 'flex', flexDirection: 'column', height: '100%' }}>
           
-          <div className="bk-def-card" style={{ padding: '18px 24px' }}>
-            <p className="bk-def-text" style={{ fontSize: '1.1rem' }}>
-              Here is a look at what is happening this week on **2gather**. Book your spots directly to connect.
+          {/* Header Announcement Block */}
+          <div style={{ 
+            display: 'flex', 
+            gap: '12px', 
+            alignItems: 'center', 
+            background: '#FFFFFF', 
+            border: '2.5px solid #000000', 
+            borderRadius: '20px', 
+            padding: '12px 16px', 
+            boxShadow: '4px 4px 0px #000000', 
+            margin: '10px 24px 12px 24px', 
+            position: 'relative' 
+          }}>
+            <div style={{ fontSize: '2.5rem', transform: 'rotate(-10deg)', filter: 'drop-shadow(2px 2px 0px rgba(0,0,0,0.1))' }}>📢</div>
+            <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 700, color: '#334155', lineHeight: 1.35, fontFamily: "'Nunito', sans-serif" }}>
+              Here is a look at what is happening this week on <strong style={{ color: '#5B31CC' }}>2gather</strong>. ✨ <br />
+              Book your spots directly to connect.
             </p>
+            {/* Flying purple plane */}
+            <div style={{ position: 'absolute', right: '12px', bottom: '8px', fontSize: '1.2rem', transform: 'rotate(10deg)' }}>✈️</div>
           </div>
 
-          <h3 style={{ fontSize: '1.1rem', fontWeight: 900, color: '#5B31CC', margin: '4px 0 0', textAlign: 'center' }}>🔥 Upcoming Schedule</h3>
+          {/* Upcoming Schedule Badge Banner */}
+          <div style={{ display: 'flex', justifyContent: 'center', margin: '0 0 10px 0' }}>
+            <div style={{
+              background: '#7B55E8',
+              color: 'white',
+              padding: '6px 18px',
+              borderRadius: '30px',
+              border: '2.5px solid #000000',
+              boxShadow: '3px 3px 0px #000000',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 900,
+              fontSize: '0.8rem',
+              letterSpacing: '0.04em'
+            }}>
+              📅 UPCOMING SCHEDULE
+            </div>
+          </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div className="calendar-mix-item">
-              <div className="calendar-mix-date">
-                MAY<br /><span style={{ fontSize: '1.1rem', fontWeight: 900 }}>30</span>
+          {/* Schedule List */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '0 24px' }}>
+            {/* Item 1 */}
+            <div style={{
+              background: '#FFFFFF',
+              border: '2px solid #000000',
+              borderRadius: '16px',
+              padding: '8px 12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '10px',
+              boxShadow: '3px 3px 0px #000000'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                {/* Date Badge */}
+                <div style={{
+                  background: '#EEF2F6',
+                  border: '2px solid #000000',
+                  borderRadius: '8px',
+                  padding: '3px 8px',
+                  textAlign: 'center',
+                  minWidth: '48px'
+                }}>
+                  <span style={{ fontSize: '0.6rem', fontWeight: 900, color: '#3B82F6', display: 'block', lineHeight: 1 }}>MAY</span>
+                  <span style={{ fontSize: '1.1rem', fontWeight: 900, color: '#3B82F6', display: 'block', lineHeight: 1.1 }}>30</span>
+                </div>
+                {/* Info */}
+                <div>
+                  <h4 style={{ margin: 0, fontSize: '0.8rem', fontWeight: 800, color: '#000000' }}>Pune Founders & Creators Mixer</h4>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2px', fontSize: '0.68rem', fontWeight: 700, color: '#64748b' }}>
+                    <span>⏰ Sat, 6:30 PM</span>
+                    <span style={{ color: '#E11D48' }}>📍 KP Social</span>
+                  </div>
+                </div>
               </div>
-              <div className="calendar-mix-info">
-                <h4 className="calendar-mix-title">Pune Founders & Creators Mixer</h4>
-                <span className="calendar-mix-time">☕ Sat, 6:30 PM · KP Social</span>
-              </div>
+              <span style={{ fontSize: '1.4rem' }}>🥂</span>
             </div>
 
-            <div className="calendar-mix-item">
-              <div className="calendar-mix-date" style={{ background: '#fee2e2', color: '#ef4444' }}>
-                MAY<br /><span style={{ fontSize: '1.1rem', fontWeight: 900 }}>31</span>
+            {/* Item 2 */}
+            <div style={{
+              background: '#FFFFFF',
+              border: '2px solid #000000',
+              borderRadius: '16px',
+              padding: '8px 12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '10px',
+              boxShadow: '3px 3px 0px #000000'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                {/* Date Badge */}
+                <div style={{
+                  background: '#FFE4E6',
+                  border: '2px solid #000000',
+                  borderRadius: '8px',
+                  padding: '3px 8px',
+                  textAlign: 'center',
+                  minWidth: '48px'
+                }}>
+                  <span style={{ fontSize: '0.6rem', fontWeight: 900, color: '#E11D48', display: 'block', lineHeight: 1 }}>MAY</span>
+                  <span style={{ fontSize: '1.1rem', fontWeight: 900, color: '#E11D48', display: 'block', lineHeight: 1.1 }}>31</span>
+                </div>
+                {/* Info */}
+                <div>
+                  <h4 style={{ margin: 0, fontSize: '0.8rem', fontWeight: 800, color: '#000000' }}>Sunrise Trek & French Press</h4>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2px', fontSize: '0.68rem', fontWeight: 700, color: '#64748b' }}>
+                    <span>⏰ Sun, 5:30 AM</span>
+                    <span style={{ color: '#E11D48' }}>📍 Sinhagad Fort</span>
+                  </div>
+                </div>
               </div>
-              <div className="calendar-mix-info">
-                <h4 className="calendar-mix-title">Sunrise Trek & French Press</h4>
-                <span className="calendar-mix-time">🌲 Sun, 5:30 AM · Sinhagad Fort</span>
-              </div>
+              <span style={{ fontSize: '1.4rem' }}>⛰️</span>
             </div>
 
-            <div className="calendar-mix-item">
-              <div className="calendar-mix-date" style={{ background: '#fef3c7', color: '#d97706' }}>
-                JUN<br /><span style={{ fontSize: '1.1rem', fontWeight: 900 }}>03</span>
+            {/* Item 3 */}
+            <div style={{
+              background: '#FFFFFF',
+              border: '2px solid #000000',
+              borderRadius: '16px',
+              padding: '8px 12px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '10px',
+              boxShadow: '3px 3px 0px #000000'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                {/* Date Badge */}
+                <div style={{
+                  background: '#FEF3C7',
+                  border: '2px solid #000000',
+                  borderRadius: '8px',
+                  padding: '3px 8px',
+                  textAlign: 'center',
+                  minWidth: '48px'
+                }}>
+                  <span style={{ fontSize: '0.6rem', fontWeight: 900, color: '#D97706', display: 'block', lineHeight: 1 }}>JUN</span>
+                  <span style={{ fontSize: '1.1rem', fontWeight: 900, color: '#D97706', display: 'block', lineHeight: 1.1 }}>03</span>
+                </div>
+                {/* Info */}
+                <div>
+                  <h4 style={{ margin: 0, fontSize: '0.8rem', fontWeight: 800, color: '#000000' }}>Board Games & Craft Beer</h4>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2px', fontSize: '0.68rem', fontWeight: 700, color: '#64748b' }}>
+                    <span>⏰ Wed, 7:00 PM</span>
+                    <span style={{ color: '#E11D48' }}>📍 KP Pune</span>
+                  </div>
+                </div>
               </div>
-              <div className="calendar-mix-info">
-                <h4 className="calendar-mix-title">Board Games & Craft Beer</h4>
-                <span className="calendar-mix-time">🎯 Wed, 7:00 PM · KP Pune</span>
-              </div>
+              <span style={{ display: 'flex', gap: '2px', fontSize: '1.3rem' }}>🍺🎲</span>
             </div>
+          </div>
+
+          {/* Bottom Banner */}
+          <div style={{
+            background: '#ECFDF5',
+            border: '2px solid #10B981',
+            borderRadius: '14px',
+            padding: '8px 14px',
+            margin: '12px 24px 0 24px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
+          }}>
+            <div style={{
+              background: '#10B981',
+              color: '#FFFFFF',
+              borderRadius: '50%',
+              width: '20px',
+              height: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '0.7rem'
+            }}>⭐</div>
+            <p style={{
+              margin: 0,
+              fontSize: '0.74rem',
+              fontWeight: 800,
+              color: '#065F46',
+              lineHeight: 1.3
+            }}>
+              Meet. Mingle. Make memories. <span style={{ color: '#047857' }}>That's the 2gather way!</span> 🚀
+            </p>
           </div>
         </div>
       </div>
@@ -1323,90 +1614,373 @@ function Slide8() {
   };
 
   return (
-    <div className="slide-container">
+    <div className="slide-container" style={{ width: '100%', height: '100%' }}>
       {/* ── LEFT PAGE ── */}
-      <div className="bk-left">
+      <div className="bk-left" style={{ overflow: 'hidden' }}>
         <div className="bk-page-num">
           <div className="num">08</div>
           <div className="of">of 08</div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '24px' }}>
-          <img src="/Color%20Logo.png" alt="2gather Logo" style={{ height: '36px', objectFit: 'contain' }} />
+        {/* Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '20px' }}>
+          <img src="/Color%20Logo.png" alt="2gather Logo" style={{ height: '32px', objectFit: 'contain' }} />
         </div>
 
-        <div style={{ padding: '20px 28px 0', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '6px', position: 'relative' }}>
-          <div style={{ position: 'relative', alignSelf: 'flex-start', marginLeft: '16px' }}>
-            <div className="bk-bubble-top" style={{ background: '#5B31CC' }}>Secure Priority</div>
-            <div className="bk-smiley" style={{ background: '#25d366', color: 'white' }}>🚀</div>
+        {/* Secure Priority Capsule Badge */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '14px' }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #4f46e5 0%, #3115a5 100%)',
+            color: 'white',
+            padding: '6px 18px',
+            borderRadius: '30px',
+            border: '2.5px solid #000000',
+            boxShadow: '3px 3px 0px #000000',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontWeight: 900,
+            fontSize: '0.8rem',
+            letterSpacing: '0.04em'
+          }}>
+            <span style={{
+              background: '#FF8A00',
+              borderRadius: '50%',
+              width: '18px',
+              height: '18px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '0.7rem',
+              border: '1.2px solid #000'
+            }}>🔒</span>
+            SECURE PRIORITY
           </div>
-          <div className="bk-bubble-bottom" style={{ fontSize: '3.6rem', background: '#25d366', color: '#064e3b', padding: '10px 32px' }}>Access</div>
         </div>
 
-        <div style={{ padding: '14px 24px 0', position: 'relative' }}>
-          <div className="bk-tape" style={{ top: 12, left: 10, transform: 'rotate(-5deg)' }} />
-          <div className="bk-polaroid">
-            <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=900&auto=format&fit=crop" alt="join waitlist" style={{ height: '210px' }} />
+        {/* Heading */}
+        <h2 style={{
+          fontFamily: "'Outfit', sans-serif",
+          fontSize: '2.1rem',
+          fontWeight: 900,
+          textAlign: 'center',
+          color: '#000000',
+          margin: '14px 0 4px 0',
+          lineHeight: 1.15
+        }}>
+          You're on the <span style={{ color: '#5B31CC' }}>Priority List!</span>
+        </h2>
+
+        {/* Subheading */}
+        <p style={{
+          fontFamily: "'Nunito', sans-serif",
+          fontSize: '0.85rem',
+          fontWeight: 700,
+          color: '#64748b',
+          textAlign: 'center',
+          margin: '0 20px 14px 20px',
+          lineHeight: 1.35
+        }}>
+          Be among the first to experience 2gather. <br />Invites are <span style={{ color: '#5B31CC', fontWeight: 800 }}>released in batches</span>.
+        </p>
+
+        {/* Feature List Container Card */}
+        <div style={{
+          background: '#F5F3FF',
+          border: '2.5px solid #000000',
+          borderRadius: '16px',
+          padding: '12px 16px',
+          margin: '0 24px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          boxShadow: '4px 4px 0px #000000'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ background: '#E0E7FF', border: '1.5px solid #000', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem', flexShrink: 0 }}>🛡️</div>
+            <div>
+              <h4 style={{ margin: 0, fontSize: '0.85rem', fontWeight: 800, color: '#1e1b4b', lineHeight: 1.1 }}>Early Access</h4>
+              <p style={{ margin: 0, fontSize: '0.72rem', fontWeight: 700, color: '#64748b' }}>Get in before the crowd.</p>
+            </div>
           </div>
-          <div className="bk-sticky" style={{ bottom: -20, left: 40 }}>
-            Join the waitlist today!
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ background: '#EEF2F6', border: '1.5px solid #000', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem', flexShrink: 0 }}>🔒</div>
+            <div>
+              <h4 style={{ margin: 0, fontSize: '0.85rem', fontWeight: 800, color: '#1e1b4b', lineHeight: 1.1 }}>Secure & Private</h4>
+              <p style={{ margin: 0, fontSize: '0.72rem', fontWeight: 700, color: '#64748b' }}>Your data and privacy are our top priority.</p>
+            </div>
           </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ background: '#F3F0FF', border: '1.5px solid #000', width: '28px', height: '28px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem', flexShrink: 0 }}>👥</div>
+            <div>
+              <h4 style={{ margin: 0, fontSize: '0.85rem', fontWeight: 800, color: '#1e1b4b', lineHeight: 1.1 }}>Built for Communities</h4>
+              <p style={{ margin: 0, fontSize: '0.72rem', fontWeight: 700, color: '#64748b' }}>Connect, collaborate, and grow together.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Absolute Floating Envelope */}
+        <div style={{
+          position: 'absolute',
+          bottom: '22px',
+          right: '20px',
+          width: '120px',
+          zIndex: 20,
+          transform: 'rotate(6deg)'
+        }}>
+          <div style={{ position: 'relative' }}>
+            {/* Card peaking out */}
+            <div style={{
+              background: '#FFFFFF',
+              border: '2px solid #000000',
+              borderRadius: '5px',
+              padding: '6px 4px',
+              textAlign: 'center',
+              transform: 'translateY(-12px) rotate(-6deg)',
+              boxShadow: '1.5px 1.5px 0px rgba(0,0,0,0.15)',
+              position: 'relative',
+              zIndex: 1
+            }}>
+              <span style={{
+                fontFamily: "'Caveat', cursive",
+                fontWeight: 700,
+                fontSize: '1rem',
+                color: '#5B31CC',
+                display: 'block',
+                lineHeight: 1
+              }}>You're</span>
+              <span style={{
+                fontFamily: "'Caveat', cursive",
+                fontWeight: 700,
+                fontSize: '1rem',
+                color: '#FF6B00',
+                display: 'block',
+                lineHeight: 1
+              }}>Invited!</span>
+            </div>
+            {/* Envelope Pocket */}
+            <div style={{
+              background: '#7B55E8',
+              border: '2.5px solid #000000',
+              borderRadius: '6px',
+              height: '60px',
+              boxShadow: '2.5px 2.5px 0px #000000',
+              position: 'relative',
+              zIndex: 2,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <div style={{
+                position: 'absolute',
+                bottom: '6px',
+                left: '6px',
+                background: '#FFFFFF',
+                borderRadius: '50%',
+                width: '24px',
+                height: '24px',
+                border: '1.5px solid #000000',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '1px 1px 0px #000'
+              }}>
+                <img src="/Color%20Logo.png" alt="2gather" style={{ width: '14px', height: '14px', objectFit: 'contain' }} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Vector Landscape Bottom Border */}
+        <div style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: '32px',
+          background: '#F0EDFF',
+          borderTop: '2px solid #000000',
+          zIndex: 5,
+          borderBottomLeftRadius: '16px',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'flex-end',
+          padding: '0 16px 2px 16px',
+          gap: '16px'
+        }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ width: '10px', height: '16px', background: '#7B55E8', borderRadius: '50%', border: '1.2px solid #000' }} />
+            <div style={{ width: '1.5px', height: '3px', background: '#000' }} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ width: '8px', height: '12px', background: '#FF8A00', borderRadius: '50%', border: '1.2px solid #000' }} />
+            <div style={{ width: '1.5px', height: '2px', background: '#000' }} />
+          </div>
+          <div style={{ width: '12px', height: '8px', background: '#10B981', border: '1.2px solid #000', borderRadius: '6px 6px 0 0' }} />
         </div>
       </div>
 
       {/* ── RIGHT PAGE ── */}
-      <div className="bk-right">
-        <div className="bk-right-content" style={{ justifyContent: 'center' }}>
-          <div style={{ position: 'absolute', top: 20, right: 60, fontSize: '1.8rem' }}>🚀</div>
+      <div className="bk-right" style={{ overflow: 'hidden' }}>
+        <div className="bk-right-content" style={{ padding: '0', justifyContent: 'center', display: 'flex', flexDirection: 'column', height: '100%' }}>
           
-          <div style={{ textAlign: 'center', marginBottom: '14px' }}>
-            <h3 style={{ fontSize: '1.6rem', fontWeight: 900, color: '#1A1759', margin: 0 }}>Gather with Us</h3>
-            <p style={{ fontSize: '0.95rem', fontWeight: 700, color: '#64748b', margin: '4px 0 0' }}>
-              We are releasing invites in batches. Secure priority access now!
-            </p>
+          {/* Rocket Header Illustration */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
+            height: '95px',
+            marginTop: '10px'
+          }}>
+            <div className="bk-float" style={{ fontSize: '3.8rem', zIndex: 2 }}>🚀</div>
+            <div style={{ position: 'absolute', top: 15, left: '34%', fontSize: '0.8rem', color: '#FF8A00' }}>✦</div>
+            <div style={{ position: 'absolute', bottom: 5, left: '38%', fontSize: '1rem', color: '#CBD5E1' }}>☁️</div>
+            <div style={{ position: 'absolute', top: 30, right: '32%', fontSize: '0.7rem', color: '#EC4899' }}>✦</div>
+            <div style={{ position: 'absolute', bottom: 15, right: '36%', fontSize: '0.9rem', color: '#CBD5E1' }}>☁️</div>
           </div>
+
+          {/* Heading */}
+          <h2 style={{
+            fontFamily: "'Outfit', sans-serif",
+            fontSize: '1.75rem',
+            fontWeight: 900,
+            textAlign: 'center',
+            color: '#000000',
+            margin: '0 0 4px 0',
+            lineHeight: 1.2
+          }}>
+            Gather with Purpose. <br /><span style={{ color: '#5B31CC' }}>Launch Together.</span>
+          </h2>
 
           <AnimatePresence mode="wait">
             {!done ? (
-              <motion.form 
-                key="form"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                onSubmit={handleSubmit} 
-                className="waitlist-slide-form"
-              >
-                <input 
-                  type="email" 
-                  required
-                  placeholder="Enter your email address" 
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
-                  className="waitlist-slide-input" 
-                />
-                <button type="submit" className="waitlist-slide-submit">
-                  Secure Your Membership ✦
-                </button>
-              </motion.form>
+              <>
+                {/* Description */}
+                <p style={{
+                  fontFamily: "'Nunito', sans-serif",
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  color: '#64748b',
+                  textAlign: 'center',
+                  margin: '0 24px 14px 24px',
+                  lineHeight: 1.35
+                }}>
+                  Enter your email to secure your spot. <br />We'll notify you as soon as your invite is ready!
+                </p>
+
+                {/* Email Form */}
+                <form onSubmit={handleSubmit} style={{
+                  margin: '0 28px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '10px'
+                }}>
+                  <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                    <span style={{ position: 'absolute', left: '14px', color: '#7B55E8', fontSize: '1rem' }}>✉️</span>
+                    <input 
+                      type="email" 
+                      required
+                      placeholder="Enter your email address" 
+                      value={emailInput}
+                      onChange={(e) => setEmailInput(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '10px 14px 10px 38px',
+                        border: '2.5px solid #000000',
+                        borderRadius: '30px',
+                        fontFamily: "'Nunito', sans-serif",
+                        fontWeight: 700,
+                        fontSize: '0.9rem',
+                        outline: 'none',
+                        boxShadow: 'inset 0 1.5px 3px rgba(0,0,0,0.05)',
+                        background: '#FFFFFF'
+                      }}
+                    />
+                  </div>
+
+                  <button type="submit" style={{
+                    background: '#5B31CC',
+                    color: 'white',
+                    border: '2.5px solid #000000',
+                    borderRadius: '30px',
+                    padding: '10px',
+                    fontFamily: "'Nunito', sans-serif",
+                    fontWeight: 900,
+                    fontSize: '0.95rem',
+                    cursor: 'pointer',
+                    boxShadow: '3px 3px 0px #000000',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    transition: 'transform 0.2s'
+                  }}>
+                    🔒 Secure My Early Access ✦
+                  </button>
+                </form>
+
+                {/* Trust Indicators */}
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: '12px',
+                  margin: '6px 0 12px 0',
+                  fontSize: '0.72rem',
+                  fontWeight: 800,
+                  color: '#10B981'
+                }}>
+                  <span>✓ No spam</span>
+                  <span>✓ Privacy first</span>
+                  <span>✓ Easy unsubscribe</span>
+                </div>
+              </>
             ) : (
               <motion.div 
                 key="success"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                style={{ textAlign: 'center', background: '#f0fdf4', border: '2px solid #bbf7d0', borderRadius: '16px', padding: '24px' }}
+                style={{
+                  textAlign: 'center',
+                  background: '#ECFDF5',
+                  border: '2.5px solid #10B981',
+                  borderRadius: '16px',
+                  padding: '16px',
+                  margin: '0 28px 12px 28px',
+                  boxShadow: '3px 3px 0px #10B981'
+                }}
               >
-                <span style={{ fontSize: '2.5rem' }}>🎉</span>
-                <h4 style={{ fontSize: '1.25rem', fontWeight: 900, color: '#15803d', margin: '8px 0 0' }}>You're on the list!</h4>
-                <p style={{ fontSize: '0.9rem', fontWeight: 700, color: '#166534', margin: '4px 0 0' }}>
+                <span style={{ fontSize: '2.2rem' }}>🎉</span>
+                <h4 style={{ fontSize: '1.15rem', fontWeight: 900, color: '#047857', margin: '4px 0 0', fontFamily: "'Outfit', sans-serif" }}>You're on the list!</h4>
+                <p style={{ fontSize: '0.85rem', fontWeight: 700, color: '#065F46', margin: '4px 0 0', fontFamily: "'Nunito', sans-serif", lineHeight: 1.3 }}>
                   Priority invite secured for:<br />
-                  <strong style={{ color: '#15803d' }}>{emailInput}</strong>
+                  <strong style={{ color: '#047857', wordBreak: 'break-all' }}>{emailInput}</strong>
                 </p>
               </motion.div>
             )}
           </AnimatePresence>
 
-          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: '20px' }}>
-            <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#64748b' }}>🔒 Spam-free. Secure protocols.</span>
+          {/* Member Perks Gift Box Card */}
+          <div style={{
+            background: '#ECFDF5',
+            border: '2px solid #10B981',
+            borderRadius: '14px',
+            padding: '10px 14px',
+            margin: '0 28px 10px 28px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
+          }}>
+            <span style={{ fontSize: '1.5rem' }}>🎁</span>
+            <p style={{
+              margin: 0,
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              color: '#065F46',
+              lineHeight: 1.3
+            }}>
+              As a priority member, you may receive <span style={{ color: '#047857', fontWeight: 800 }}>exclusive perks</span> and early updates!
+            </p>
           </div>
         </div>
       </div>
@@ -1441,7 +2015,8 @@ export default function TwoGatherSlides({ theme = 'dark' }) {
       <style>{CSS}</style>
       <div className={`bk-wrap ${theme}`}>
         <h2 className="bk-title-above">
-          2gather
+          <span className="slogan-cursive">How</span>
+          <span className="slogan-bold">it works ❓</span>
         </h2>
         <div className="bk-book">
           {/* Metallic Gold Corner Guards */}
@@ -1478,7 +2053,7 @@ export default function TwoGatherSlides({ theme = 'dark' }) {
                 { label: 'Chief Curator Perks', index: 4, bg: '#f59e0b', e: '👑' },
                 { label: 'Weekly Mix Calendar', index: 5, bg: '#3B82F6', e: '📅' },
                 { label: 'Interactive 3D Mascot', index: 6, bg: '#06b6d4', e: '🧸' },
-                { label: 'Join Waitlist', index: 7, bg: '#25d366', e: '🚀' },
+                { label: 'Priority Access', index: 7, bg: '#00DF89', e: '🚀' },
               ].map((t) => (
                 <div 
                   key={t.index} 
@@ -1494,23 +2069,109 @@ export default function TwoGatherSlides({ theme = 'dark' }) {
           </div>
 
           {/* Bottom Navigation on purple binding */}
-          <div className="bk-nav-container">
-            <button className="bk-nav-prev" onClick={() => goTo(cur - 1)} disabled={cur === 0}>
+          <div className="bk-nav-container" style={{
+            background: '#FFFFFF',
+            border: '3px solid #000000',
+            borderRadius: '50px',
+            padding: '8px 8px 8px 24px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '24px',
+            boxShadow: '6px 6px 0px #000000',
+            width: '460px',
+            maxWidth: '95%',
+            position: 'absolute',
+            bottom: '-32px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 20
+          }}>
+            {/* Prev Trigger */}
+            <button 
+              className="bk-nav-prev" 
+              onClick={() => goTo(cur - 1)} 
+              disabled={cur === 0}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                fontFamily: "'Nunito', sans-serif",
+                fontSize: '0.95rem',
+                fontWeight: 900,
+                color: cur === 0 ? '#cbd5e1' : '#5B31CC',
+                cursor: cur === 0 ? 'not-allowed' : 'pointer',
+                padding: '4px 0',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
               ← Prev
             </button>
 
-            <div className="bk-dots">
-              {SLIDES.map((_, i) => (
-                <button key={i} className={`bk-dot${cur === i ? ' on' : ''}`} onClick={() => goTo(i)} />
-              ))}
-              <span className="bk-nav-text">
-                {cur + 1} / {SLIDES.length}
-              </span>
-            </div>
+            {/* Dynamic Step Text */}
+            <span style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontSize: '0.95rem',
+              fontWeight: 800,
+              color: '#3115A5',
+              letterSpacing: '-0.01em',
+              textAlign: 'center'
+            }}>
+              {cur === 7 ? 'Priority Access Step 8/8' : `${[
+                'Introduction',
+                'Tribes & Clubs',
+                '2gatherTV Highlights',
+                'Active Hub Cities',
+                'Curator Perks',
+                'Weekly Calendar',
+                'Interactive Mascot'
+              ][cur]} Step ${cur + 1}/8`}
+            </span>
 
-            <button className="bk-nav-next" onClick={() => goTo(cur + 1)} disabled={cur === SLIDES.length - 1}>
-              Next →
-            </button>
+            {/* Next / Done Trigger */}
+            {cur === 7 ? (
+              <button 
+                className="bk-nav-next" 
+                onClick={() => alert("Welcome aboard 2gather! You have secured priority membership access.")}
+                style={{
+                  background: '#5B31CC',
+                  border: '2.5px solid #000000',
+                  borderRadius: '50px',
+                  padding: '8px 20px',
+                  fontFamily: "'Nunito', sans-serif",
+                  fontSize: '0.95rem',
+                  fontWeight: 900,
+                  color: '#FFFFFF',
+                  cursor: 'pointer',
+                  boxShadow: '3px 3px 0px #000000',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                Done ✔
+              </button>
+            ) : (
+              <button 
+                className="bk-nav-next" 
+                onClick={() => goTo(cur + 1)}
+                style={{
+                  background: '#5B31CC',
+                  border: '2.5px solid #000000',
+                  borderRadius: '50px',
+                  padding: '8px 20px',
+                  fontFamily: "'Nunito', sans-serif",
+                  fontSize: '0.95rem',
+                  fontWeight: 900,
+                  color: '#FFFFFF',
+                  cursor: 'pointer',
+                  boxShadow: '3px 3px 0px #000000'
+                }}
+              >
+                Next →
+              </button>
+            )}
           </div>
         </div>
       </div>

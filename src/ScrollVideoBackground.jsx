@@ -6,6 +6,7 @@ function ScrollVideoBackground({ theme }) {
   const images2Ref = useRef([]);
   const targetFrameRef = useRef(1);
   const currentFrameRef = useRef(1);
+  const lastDrawnFrameRef = useRef(-1);
 
   // Preload all 240 images from contact1 and 240 images from contact2 for standard stutter-free animation
   useEffect(() => {
@@ -134,17 +135,21 @@ function ScrollVideoBackground({ theme }) {
       }
 
       const activeFrameIndex = Math.min(480, Math.max(1, Math.round(currentFrameRef.current)));
-      let activeImage;
+      
+      if (activeFrameIndex !== lastDrawnFrameRef.current) {
+        let activeImage;
 
-      if (activeFrameIndex <= 240) {
-        activeImage = images1Ref.current[activeFrameIndex - 1];
-      } else {
-        activeImage = images2Ref.current[activeFrameIndex - 241];
-      }
+        if (activeFrameIndex <= 240) {
+          activeImage = images1Ref.current[activeFrameIndex - 1];
+        } else {
+          activeImage = images2Ref.current[activeFrameIndex - 241];
+        }
 
-      if (activeImage && activeImage.complete) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawImageProp(ctx, activeImage, 0, 0, canvas.width, canvas.height);
+        if (activeImage && activeImage.complete) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          drawImageProp(ctx, activeImage, 0, 0, canvas.width, canvas.height);
+          lastDrawnFrameRef.current = activeFrameIndex;
+        }
       }
 
       animFrameId = requestAnimationFrame(animate);

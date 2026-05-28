@@ -7,11 +7,11 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  height: 70vh; /* Premium viewport height allocation */
-  overflow: hidden; /* Hide cards only at the absolute edges of the screen to prevent scrollbars */
-  background-color: transparent; /* Seamless blend with About Us page dark backdrop */
+  height: 85vh; /* Taller to give rotated cards room to breathe */
+  overflow: visible; /* Allow cards to show fully — no clipping */
+  background-color: transparent;
   margin-top: 40px;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,8 +21,8 @@
 .three-d-slider-relative-wrap {
   position: relative;
   z-index: 10;
-  height: 55vh;
-  overflow: visible; /* Cards move freely edge-to-edge across the screen! */
+  height: 68vh; /* More vertical room for tilted/offset cards */
+  overflow: visible;
   pointer-events: none;
   width: 100%;
 }
@@ -146,11 +146,11 @@
 
 @media (max-width: 768px) {
   .three-d-slider-container {
-    height: 60vh;
-    margin: 30px 0;
+    height: 72vh;
+    margin: 30px 0 60px;
   }
   .three-d-slider-relative-wrap {
-    height: 48vh;
+    height: 58vh;
   }
   .three-d-slider-static-text {
     left: 16px;

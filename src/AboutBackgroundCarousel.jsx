@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './AboutBackgroundCarousel.css';
 
 const images = [
-  '/about/ChatGPT Image May 27, 2026, 12_55_01 AM.png',
-  '/about/ChatGPT Image May 27, 2026, 12_55_08 AM.png',
-  '/about/ChatGPT Image May 27, 2026, 12_55_11 AM.png',
-  '/about/ChatGPT Image May 27, 2026, 12_55_16 AM.png',
-  '/about/ChatGPT Image May 27, 2026, 12_56_10 AM.png',
-  '/about/ChatGPT Image May 27, 2026, 12_57_43 AM.png'
+  '/about/a (1).png',
+  '/about/a (2).png',
+  '/about/a (3).png',
+  '/about/a (4).png',
+  '/about/a (5).png',
+  '/about/ChatGPT Image May 14, 2026, 05_09_42 PM.png'
 ];
 
 export const AboutBackgroundCarousel = () => {

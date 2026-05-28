@@ -49,70 +49,8 @@ function Footer({ onDownload }) {
 
           {/* Right – High-fidelity interactive app mockup */}
           <div className="footer-cta-right">
-            <div className="footer-mockup-card">
-              {/* Phone Speaker & Camera Bezel Decor */}
-              <div className="mockup-bezel-header">
-                <div className="mockup-camera" />
-                <div className="mockup-speaker" />
-              </div>
-
-              {/* Tab row matching screenshot */}
-              <div className="mockup-tab-row">
-                <button className="mockup-tab mockup-tab--inactive">Quick join</button>
-                <button className="mockup-tab mockup-tab--active-orange">All events</button>
-              </div>
-
-              {/* Filter pills row */}
-              <div className="mockup-pills-row">
-                <span className="mockup-pill mockup-pill--active">Recent</span>
-                <span className="mockup-pill">My events</span>
-                <span className="mockup-pill">Upcoming</span>
-              </div>
-
-              {/* Event card 1 - Gym Workout Session */}
-              <div className="mockup-event-card">
-                <div className="mockup-event-content-grid">
-                  <div className="mockup-event-img-wrap">
-                    <img src="/adventure_banner.png" alt="Gym Workout" className="mockup-event-image" />
-                    <span className="mockup-event-category-tag">Music</span>
-                  </div>
-                  <div className="mockup-event-details">
-                    <h4 className="mockup-event-title">Gym Workout Session</h4>
-                    <p className="mockup-event-host">Hosted by TataBhai.inc</p>
-                    <div className="mockup-event-time-location">
-                      <span>🕒 March 15, 9:00 AM</span>
-                      <span>📍 Innovation centre</span>
-                    </div>
-                    <div className="mockup-event-footer-row">
-                      <span className="mockup-event-joined">👥 1/50 joined</span>
-                    </div>
-                  </div>
-                  <button className="mockup-event-join-action-btn">Join</button>
-                </div>
-              </div>
-
-              {/* Event card 2 - Chess Local League */}
-              <div className="mockup-event-card">
-                <div className="mockup-event-content-grid">
-                  <div className="mockup-event-img-wrap">
-                    <img src="/creative_banner.png" alt="Chess Local League" className="mockup-event-image" />
-                    <span className="mockup-event-category-tag bg-orange">Music</span>
-                  </div>
-                  <div className="mockup-event-details">
-                    <h4 className="mockup-event-title">Chess Local League</h4>
-                    <p className="mockup-event-host">Hosted by TataBhai.inc</p>
-                    <div className="mockup-event-time-location">
-                      <span>🕒 March 15, 9:00 AM</span>
-                      <span>📍 Innovation centre</span>
-                    </div>
-                    <div className="mockup-event-footer-row">
-                      <span className="mockup-event-joined">👥 1/50 joined</span>
-                    </div>
-                  </div>
-                  <button className="mockup-event-join-action-btn">Join</button>
-                </div>
-              </div>
-
+            <div className="footer-mockup-image-wrapper">
+              <img src="/alllpng.png" alt="2gather App Screen" className="footer-mockup-screen-image" />
             </div>
           </div>
         </div>
@@ -120,17 +58,7 @@ function Footer({ onDownload }) {
 
       {/* ── Slanted Slogan Hero Section ── */}
       <div className="footer-slanted-hero">
-        <div className="footer-slanted-content">
-          <div className="footer-slanted-brand">
-            <div className="footer-slanted-logo-box">
-              <img 
-                src="/logo_dark.png" 
-                alt="2gather Logo" 
-                style={{ width: '28px', height: '28px', objectFit: 'contain' }} 
-              />
-            </div>
-            <span className="footer-slanted-brand-text">2gather</span>
-          </div>
+        <div className="footer-slanted-content" style={{ justifyContent: 'center', textAlign: 'center' }}>
           <h2 className="footer-slanted-heading">
             <span className="slogan-cursive">Reinventing</span>
             <span className="slogan-bold">community for a new generation</span>
@@ -146,10 +74,9 @@ function Footer({ onDownload }) {
           <div className="footer-logo">
             <img 
               src="/logo_dark.png" 
-              alt="2gather Logo" 
-              style={{ width: '32px', height: '32px', objectFit: 'contain' }} 
+              alt="2gather" 
+              style={{ height: '42px', width: 'auto', objectFit: 'contain' }} 
             />
-            <span className="footer-logo-text">2gather</span>
           </div>
           <p className="footer-tagline">Your life, your vibe, your people. All in real life.</p>
           <button className="footer-download-btn" onClick={onDownload}>Download App</button>

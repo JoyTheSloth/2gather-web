@@ -321,6 +321,101 @@ export default function WhatsAppCommunityPage({ onClose, hideHeader, hideTicker 
         input::placeholder { color: rgba(255,255,255,0.25); }
         ::-webkit-scrollbar { width:5px; } ::-webkit-scrollbar-thumb { background:rgba(79,70,229,0.4); border-radius:10px; }
         .filter-btn { cursor:pointer; font-family:'Lufga',sans-serif; font-weight:700; font-size:13px; padding:8px 20px; border-radius:50px; border:1px solid; transition:all 0.2s; }
+        
+        /* 📱 Mobile Responsive Overrides for Tribes Page */
+        @media (max-width: 768px) {
+          .tribes-hero-section {
+            padding: 80px 20px 40px !important;
+          }
+          .tribes-section-wrap {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+          .how-it-works-desktop {
+            display: none !important;
+          }
+          .how-it-works-mobile {
+            display: flex !important;
+          }
+          .how-it-works-section-wrap {
+            margin-bottom: 40px !important;
+          }
+          .how-it-works-heading {
+            font-size: 20px !important;
+            margin-bottom: 4px !important;
+          }
+          .how-it-works-sub {
+            font-size: 12px !important;
+            margin-bottom: 16px !important;
+          }
+          .tribes-hero-title {
+            font-size: 34px !important;
+            letter-spacing: -0.8px !important;
+            line-height: 1.2 !important;
+          }
+          .tribes-hero-desc {
+            font-size: 14px !important;
+            line-height: 1.6 !important;
+            padding: 0 10px !important;
+          }
+          .tribes-stats-row {
+            gap: 20px !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+          }
+          .tribes-steps-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+          .tribes-request-banner {
+            padding: 24px 18px !important;
+            flex-direction: column !important;
+            text-align: center !important;
+            align-items: center !important;
+          }
+          .tribes-request-banner-btn {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .tribes-cities-grid {
+            grid-template-columns: 1fr !important;
+            gap: 14px !important;
+          }
+          .filter-btn-container {
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            gap: 8px !important;
+          }
+          .search-container {
+            max-width: 100% !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .tribes-hero-section {
+            padding: 70px 16px 30px !important;
+          }
+          .tribes-section-wrap {
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+          }
+          .tribes-hero-title {
+            font-size: 26px !important;
+            letter-spacing: -0.5px !important;
+          }
+          .tribes-hero-desc {
+            font-size: 13px !important;
+          }
+          .tribes-stats-row {
+            gap: 14px !important;
+          }
+          .tribes-request-banner h3 {
+            font-size: 17px !important;
+          }
+          .tribes-request-banner p {
+            font-size: 13px !important;
+          }
+        }
       `}</style>
 
       <div style={{
@@ -411,24 +506,24 @@ export default function WhatsAppCommunityPage({ onClose, hideHeader, hideTicker 
         )}
 
         {/* HERO */}
-        <div style={{ position: "relative", zIndex: 5, textAlign: "center", padding: "140px 40px 50px", maxWidth: 760, margin: "0 auto" }}>
+        <div className="tribes-hero-section" style={{ position: "relative", zIndex: 5, textAlign: "center", padding: "140px 40px 50px", maxWidth: 760, margin: "0 auto" }}>
           {/* WA Badge */}
           <div style={{ display: "inline-flex", alignItems: "center", gap: 9, background: "rgba(37,211,102,0.12)", border: "1px solid rgba(37,211,102,0.3)", borderRadius: 50, padding: "8px 20px", marginBottom: 30, animation: "fadeUp 0.5s ease forwards" }}>
             <WhatsAppIcon size={16} color="#25D366" />
             <span style={{ fontFamily: "'Lufga', sans-serif", fontWeight: 700, fontSize: 13, color: "#25D366" }}>Official WhatsApp Communities</span>
           </div>
 
-          <h1 style={{ fontFamily: "'Lufga', sans-serif", fontSize: 56, fontWeight: 800, color: "#f1f0ff", lineHeight: 1.1, marginBottom: 20, letterSpacing: -1.5, animation: "fadeUp 0.5s 0.1s ease forwards", opacity: 0 }}>
+          <h1 className="tribes-hero-title" style={{ fontFamily: "'Lufga', sans-serif", fontSize: 56, fontWeight: 800, color: "#f1f0ff", lineHeight: 1.1, marginBottom: 20, letterSpacing: -1.5, animation: "fadeUp 0.5s 0.1s ease forwards", opacity: 0 }}>
             Find your city,<br />
             <span style={{ background: "linear-gradient(90deg,#25D366,#128C7E)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>join your tribe.</span>
           </h1>
 
-          <p style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Lufga', sans-serif", fontSize: 17, lineHeight: 1.7, marginBottom: 40, animation: "fadeUp 0.5s 0.2s ease forwards", opacity: 0 }}>
+          <p className="tribes-hero-desc" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Lufga', sans-serif", fontSize: 17, lineHeight: 1.7, marginBottom: 40, animation: "fadeUp 0.5s 0.2s ease forwards", opacity: 0 }}>
             One tap. That's all it takes to connect with thousands of gatherers<br />in your city — events, hangouts, and real friendships, on WhatsApp.
           </p>
 
           {/* Stats row */}
-          <div style={{ display: "flex", justifyContent: "center", gap: 32, marginBottom: 50, animation: "fadeUp 0.5s 0.3s ease forwards", opacity: 0 }}>
+          <div className="tribes-stats-row" style={{ display: "flex", justifyContent: "center", gap: 32, marginBottom: 50, animation: "fadeUp 0.5s 0.3s ease forwards", opacity: 0 }}>
             {[
               ["12", "Cities"],
               ["13K+", "Members"],
@@ -483,7 +578,7 @@ export default function WhatsAppCommunityPage({ onClose, hideHeader, hideTicker 
                 }}
               />
             </div>
-            <div style={{ display: "flex", gap: 10 }}>
+            <div className="filter-btn-container" style={{ display: "flex", gap: 10 }}>
               {[["all", "All Cities"], ["active", "🟢 Active"], ["soon", "⏳ Coming Soon"]].map(([val, label]) => (
                 <button
                   key={val}
@@ -559,13 +654,13 @@ export default function WhatsAppCommunityPage({ onClose, hideHeader, hideTicker 
         </div>
 
         {/* CITY GRID */}
-        <div id="cities" style={{ position: "relative", zIndex: 5, maxWidth: 1160, margin: "0 auto", padding: "0 40px 60px" }}>
+        <div id="cities" className="tribes-section-wrap" style={{ position: "relative", zIndex: 5, maxWidth: 1160, margin: "0 auto", padding: "0 40px 60px" }}>
           {filtered.length === 0 ? (
             <div style={{ textAlign: "center", padding: "60px 0", color: "rgba(255,255,255,0.35)", fontFamily: "'Lufga', sans-serif", fontSize: 16 }}>
               😕 No cities found for "<strong style={{ color: "rgba(255,255,255,0.6)" }}>{search}</strong>"
             </div>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 18 }}>
+            <div className="tribes-cities-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 18 }}>
               {filtered.map((city, i) => <CityCard key={city.name} city={city} index={i} />)}
             </div>
           )}
@@ -573,7 +668,7 @@ export default function WhatsAppCommunityPage({ onClose, hideHeader, hideTicker 
 
         {/* REQUEST CITY BANNER */}
         <div style={{ position: "relative", zIndex: 5, maxWidth: 1160, margin: "0 auto 80px", padding: "0 40px" }}>
-          <div style={{ background: "linear-gradient(135deg, rgba(79,70,229,0.2), rgba(37,211,102,0.1))", border: "1px solid rgba(79,70,229,0.3)", borderRadius: 24, padding: "36px 40px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap" }}>
+          <div className="tribes-request-banner" style={{ background: "linear-gradient(135deg, rgba(79,70,229,0.2), rgba(37,211,102,0.1))", border: "1px solid rgba(79,70,229,0.3)", borderRadius: 24, padding: "36px 40px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, flexWrap: "wrap" }}>
             <div>
               <h3 style={{ fontFamily: "'Lufga', sans-serif", fontSize: 22, fontWeight: 800, color: "#f1f0ff", marginBottom: 8 }}>Don't see your city? 🙋</h3>
               <p style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Lufga', sans-serif", fontSize: 15, maxWidth: 480 }}>
@@ -583,6 +678,7 @@ export default function WhatsAppCommunityPage({ onClose, hideHeader, hideTicker 
             <a
               href="https://wa.me/91XXXXXXXXXX?text=Hey%202gather!%20I%27d%20love%20a%20WhatsApp%20community%20for%20my%20city%20%F0%9F%99%8F"
               target="_blank" rel="noreferrer"
+              className="tribes-request-banner-btn"
               style={{ display: "flex", alignItems: "center", gap: 10, background: "#25D366", color: "#fff", padding: "14px 28px", borderRadius: 14, fontFamily: "'Lufga', sans-serif", fontWeight: 800, fontSize: 15, textDecoration: "none", flexShrink: 0, transition: "opacity 0.2s" }}
               onMouseEnter={e => e.currentTarget.style.opacity = "0.88"}
               onMouseLeave={e => e.currentTarget.style.opacity = "1"}
@@ -593,10 +689,12 @@ export default function WhatsAppCommunityPage({ onClose, hideHeader, hideTicker 
         </div>
 
         {/* HOW IT WORKS */}
-        <div style={{ position: "relative", zIndex: 5, maxWidth: 1160, margin: "0 auto 80px", padding: "0 40px" }}>
-          <h2 style={{ fontFamily: "'Lufga', sans-serif", fontSize: 30, fontWeight: 800, color: "#f1f0ff", textAlign: "center", marginBottom: 10 }}>How it works</h2>
-          <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Lufga', sans-serif", fontSize: 15, textAlign: "center", marginBottom: 36 }}>Three steps to your next real-life hangout</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+        <div className="tribes-section-wrap how-it-works-section-wrap" style={{ position: "relative", zIndex: 5, maxWidth: 1160, margin: "0 auto 80px", padding: "0 40px" }}>
+          <h2 className="how-it-works-heading" style={{ fontFamily: "'Lufga', sans-serif", fontSize: 30, fontWeight: 800, color: "#f1f0ff", textAlign: "center", marginBottom: 10 }}>How it works</h2>
+          <p className="how-it-works-sub" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Lufga', sans-serif", fontSize: 15, textAlign: "center", marginBottom: 36 }}>Three steps to your next real-life hangout</p>
+
+          {/* Desktop: 3-column grid cards */}
+          <div className="tribes-steps-grid how-it-works-desktop" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {[
               { n: "01", icon: "🏙️", title: "Pick Your City", desc: "Browse the list and find the community for your city. Active groups are marked in green." },
               { n: "02", icon: "📲", title: "Tap to Join", desc: "Hit the WhatsApp button. You'll be taken directly to the group link — no form, no wait." },
@@ -607,6 +705,42 @@ export default function WhatsAppCommunityPage({ onClose, hideHeader, hideTicker 
                 <div style={{ color: "rgba(37,211,102,0.7)", fontFamily: "'Lufga', sans-serif", fontSize: 11, fontWeight: 800, letterSpacing: 1.5, marginBottom: 8 }}>STEP {s.n}</div>
                 <h3 style={{ fontFamily: "'Lufga', sans-serif", fontSize: 18, fontWeight: 800, color: "#f1f0ff", marginBottom: 8 }}>{s.title}</h3>
                 <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Lufga', sans-serif", fontSize: 14, lineHeight: 1.6 }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile: ultra-compact step rows */}
+          <div className="how-it-works-mobile" style={{ display: "none", flexDirection: "column", gap: 8 }}>
+            {[
+              { n: "01", icon: "🏙️", title: "Pick Your City", desc: "Find your city's WhatsApp group." },
+              { n: "02", icon: "📲", title: "Tap to Join", desc: "One tap — straight into the group." },
+              { n: "03", icon: "🎉", title: "Meet & Gather", desc: "Show up, meet people, have fun." },
+            ].map((s) => (
+              <div key={s.n} style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.07)",
+                borderRadius: 12,
+                padding: "10px 14px",
+              }}>
+                {/* Icon circle */}
+                <div style={{
+                  width: 36, height: 36, borderRadius: "50%",
+                  background: "rgba(37,211,102,0.1)",
+                  border: "1.5px solid rgba(37,211,102,0.25)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  flexShrink: 0, fontSize: 16,
+                }}>{s.icon}</div>
+                {/* Step + Title + Desc inline */}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
+                    <span style={{ color: "rgba(37,211,102,0.75)", fontFamily: "'Lufga', sans-serif", fontSize: 9, fontWeight: 800, letterSpacing: 1.1, flexShrink: 0 }}>STEP {s.n}</span>
+                    <span style={{ fontFamily: "'Lufga', sans-serif", fontSize: 13, fontWeight: 800, color: "#f1f0ff", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{s.title}</span>
+                  </div>
+                  <p style={{ color: "rgba(255,255,255,0.38)", fontFamily: "'Lufga', sans-serif", fontSize: 11, lineHeight: 1.4, margin: "1px 0 0" }}>{s.desc}</p>
+                </div>
               </div>
             ))}
           </div>

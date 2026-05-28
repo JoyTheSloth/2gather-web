@@ -21,6 +21,9 @@ const SliderItem = React.forwardRef(({ item, onClick }, ref) => {
                 className="slider-item-content"
                 style={{ opacity: 1 }} // Initial opacity
             >
+                {/* Washi tape for scrapbook polaroid effect */}
+                <div className="scrapbook-tape tape-slider" />
+
                 {/* Overlay for gradient effect */}
                 <div className="slider-item-overlay"></div>
 
@@ -249,13 +252,6 @@ const ThreeDSlider = ({
                         onClick={() => handleClick(item, index)}
                     />
                 ))}
-            </div>
-            {/* Static layout text */}
-            <div className="three-d-slider-static-layout">
-                <div className="three-d-slider-static-line"></div>
-                <div className="three-d-slider-static-text">
-                    2gather memories
-                </div>
             </div>
         </div>
     );

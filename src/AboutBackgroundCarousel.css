@@ -3,12 +3,9 @@
 .about-bg-carousel-container {
   position: fixed; /* Keep it static and cinematic behind scrolling elements */
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  /* Perfect 16:9 viewport fitting formula starting at top */
-  width: min(100vw, 177.78vh);
-  height: min(56.25vw, 100vh);
-  aspect-ratio: 16 / 9;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 0;
   overflow: hidden;
   pointer-events: none; /* Crucial: background must not intercept clicks or drags on page content */
@@ -37,12 +34,6 @@
   z-index: 1;
 }
 
-/* Light mode adjustments */
-.light .about-bg-slide.active {
-  opacity: 0.8; /* Highly visible, sharp, and crisp background photos in light mode! */
-}
-
-/* Dynamic ambient overlay - NO HEAVY WHITE FOG BLUR, completely clear for light theme */
 .about-bg-carousel-overlay {
   position: absolute;
   top: 0;
@@ -52,9 +43,4 @@
   z-index: 2;
   /* Radial vignette to help frame text legibility on top of sharp high-res images */
   background: radial-gradient(circle at 50% 50%, rgba(10, 15, 30, 0.1) 0%, rgba(10, 15, 30, 0.75) 100%);
-}
-
-.light .about-bg-carousel-overlay {
-  /* Completely clear subtle contrast transition without thick white fog blur/fog overlay */
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.25) 100%);
 }

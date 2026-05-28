@@ -16,6 +16,8 @@ import ThreeDSlider from './ThreeDSlider';
 import ToggleTheme from './ToggleTheme';
 import AboutBackgroundCarousel from './AboutBackgroundCarousel';
 import ScrollReveal from './ScrollReveal';
+import Ribbons from './Ribbons';
+import BounceCards from './BounceCards';
 
 function FeatureStepper({ theme }) {
   return (
@@ -587,6 +589,7 @@ function App() {
   ];
 
   const [events, setEvents] = useState(initialEvents);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   
   const [newEvent, setNewEvent] = useState({
     title: '',
@@ -819,7 +822,107 @@ function App() {
 
 
       {/* Unified Navbar */}
-      <header className={`header ${isScrolled ? 'scrolled' : ''}`} role="banner">
+      <header className={`header ${(isScrolled || activeTab === 'contact') ? 'scrolled' : ''}`}>
+        {activeTab === 'events' && (
+          <style dangerouslySetInnerHTML={{ __html: `
+            .header:not(.scrolled) .navbar-link {
+              color: #ffffff !important;
+              opacity: 0.9;
+            }
+            .header:not(.scrolled) .navbar-link.active {
+              color: #ffffff !important;
+              opacity: 1;
+              border-bottom-color: #ffffff !important;
+            }
+            .header:not(.scrolled) .navbar-link:hover {
+              color: #ffffff !important;
+              opacity: 1;
+            }
+            .header:not(.scrolled) .navbar-toggle-theme-btn.is-light {
+              color: #ffffff !important;
+              border-color: rgba(255, 255, 255, 0.35) !important;
+              background-color: rgba(255, 255, 255, 0.22) !important;
+              backdrop-filter: blur(16px) !important;
+              -webkit-backdrop-filter: blur(16px) !important;
+            }
+            .header:not(.scrolled) .navbar-toggle-theme-btn.is-light:hover {
+              color: #3b82f6 !important;
+              background-color: rgba(255, 255, 255, 0.35) !important;
+              border-color: rgba(255, 255, 255, 0.5) !important;
+            }
+          `}} />
+        )}
+        {activeTab === 'communities' && (
+          <style dangerouslySetInnerHTML={{ __html: `
+            .header:not(.scrolled) .navbar-link {
+              color: #ffffff !important;
+              opacity: 0.9;
+            }
+            .header:not(.scrolled) .navbar-link.active {
+              color: #ffffff !important;
+              opacity: 1;
+              border-bottom-color: #ffffff !important;
+            }
+            .header:not(.scrolled) .navbar-link:hover {
+              color: #ffffff !important;
+              opacity: 1;
+            }
+            .header:not(.scrolled) .navbar-toggle-theme-btn.is-light {
+              color: #ffffff !important;
+              border-color: rgba(255, 255, 255, 0.35) !important;
+              background-color: rgba(255, 255, 255, 0.22) !important;
+              backdrop-filter: blur(16px) !important;
+              -webkit-backdrop-filter: blur(16px) !important;
+            }
+            .header:not(.scrolled) .navbar-toggle-theme-btn.is-light:hover {
+              color: #3b82f6 !important;
+              background-color: rgba(255, 255, 255, 0.35) !important;
+              border-color: rgba(255, 255, 255, 0.5) !important;
+            }
+          `}} />
+        )}
+        {activeTab === 'aboutUs' && (
+          <style dangerouslySetInnerHTML={{ __html: `
+            .header:not(.scrolled) .navbar-link {
+              color: #ffffff !important;
+              opacity: 0.9;
+            }
+            .header:not(.scrolled) .navbar-link.active {
+              color: #ffffff !important;
+              opacity: 1;
+              border-bottom-color: #ffffff !important;
+            }
+            .header:not(.scrolled) .navbar-link:hover {
+              color: #ffffff !important;
+              opacity: 1;
+            }
+            .header:not(.scrolled) .navbar-toggle-theme-btn.is-light {
+              color: #ffffff !important;
+              border-color: rgba(255, 255, 255, 0.35) !important;
+              background-color: rgba(255, 255, 255, 0.22) !important;
+              backdrop-filter: blur(16px) !important;
+              -webkit-backdrop-filter: blur(16px) !important;
+            }
+            .header:not(.scrolled) .navbar-toggle-theme-btn.is-light:hover {
+              color: #3b82f6 !important;
+              background-color: rgba(255, 255, 255, 0.35) !important;
+              border-color: rgba(255, 255, 255, 0.5) !important;
+            }
+            /* Dark background and overlay overrides for light theme only on the About page */
+            .app-container.light {
+              background-color: #07050d !important;
+            }
+            .app-container.light .ambient-bg {
+              background: transparent !important;
+              opacity: 0.8 !important;
+              filter: none !important;
+            }
+            .app-container.light .ambient-overlay {
+              background: radial-gradient(circle at center, rgba(0,0,0,0) 20%, rgba(7,5,13,0.6) 80%, rgba(7,5,13,0.92) 100%) !important;
+              opacity: 1 !important;
+            }
+          `}} />
+        )}
         <div className="navbar-container">
           {/* Left: Logo */}
           <a
@@ -829,7 +932,7 @@ function App() {
             aria-label="2gather Home"
           >
             <img
-              src={theme === 'dark' ? '/logo_dark.png' : '/Color%20Logo.png'}
+              src={(theme === 'dark' || ((activeTab === 'communities' || activeTab === 'aboutUs' || activeTab === 'home' || activeTab === 'events') && !(isScrolled || activeTab === 'contact'))) ? '/logo_dark.png' : '/Color%20Logo.png'}
               alt="2gather"
               className="navbar-logo-img"
             />
@@ -871,26 +974,28 @@ function App() {
       {/* Main content body with dynamic tab views powered by activeTab */}
       <main className="main-content" style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, width: '100%' }}>
         {/* Desktop Side Links */}
-        <div className="desktop-only-socials">
-          <a 
-            href="https://github.com" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="side-link left"
-            id="github-anchor"
-          >
-            GITHUB
-          </a>
-          <a 
-            href="https://discord.com" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="side-link right"
-            id="discord-anchor"
-          >
-            DISCORD
-          </a>
-        </div>
+        {activeTab !== 'contact' && (
+          <div className="desktop-only-socials">
+            <a 
+              href="https://github.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="side-link left"
+              id="github-anchor"
+            >
+              GITHUB
+            </a>
+            <a 
+              href="https://discord.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="side-link right"
+              id="discord-anchor"
+            >
+              DISCORD
+            </a>
+          </div>
+        )}
 
         {/* Dynamic Animated Tab Container */}
         <div key={activeTab} className="animated-view">
@@ -907,6 +1012,18 @@ function App() {
                 className="home-bg-video"
               />
               <div className="home-bg-overlay"></div>
+              {/* Premium Interactive Ribbons mouse trailer background */}
+              <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'auto', opacity: 0.65 }}>
+                <Ribbons
+                  baseThickness={22}
+                  colors={['#25D366', '#3b82f6', '#ffffff']}
+                  speedMultiplier={0.5}
+                  maxAge={600}
+                  enableFade={true}
+                  enableShaderEffect={true}
+                  offsetFactor={0.03}
+                />
+              </div>
             </div>
             {/* Eyebrow badge */}
             <div className="home-hero-badge">
@@ -1254,8 +1371,79 @@ function App() {
               <AboutBackgroundCarousel />
               <div className="about-page-container" style={{ position: 'relative', zIndex: 1 }}>
                 
+                {/* 🎨 Hand-drawn Scrapbook Doodles Container 🎨 */}
+                <div className="scrapbook-doodle-container">
+                  {/* Heart Doodle left of hero */}
+                  <svg className="scrapbook-doodle doodle-heart-1" viewBox="0 0 50 50">
+                    <path d="M 25 15 C 18 2, 3 2, 3 20 C 3 33, 25 45, 25 45 C 25 45, 47 33, 47 20 C 47 2, 32 2, 25 15 Z" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                  </svg>
+
+                  {/* Squiggly Smiley right of badge */}
+                  <svg className="scrapbook-doodle doodle-smiley" viewBox="0 0 50 50">
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                    <circle cx="17" cy="18" r="2.5" fill="currentColor" />
+                    <circle cx="33" cy="18" r="2.5" fill="currentColor" />
+                    <path d="M 16 28 Q 25 36 34 28" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                  </svg>
+
+                  {/* Cute Sparkles floating around badge and CTA */}
+                  <svg className="scrapbook-doodle doodle-sparkle-1" viewBox="0 0 50 50">
+                    <path d="M25,5 C25,18 32,25 45,25 C32,25 25,32 25,45 C25,32 18,25 5,25 C18,25 25,18 25,5 Z" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                  </svg>
+                  <svg className="scrapbook-doodle doodle-sparkle-2" viewBox="0 0 50 50">
+                    <path d="M25,5 C25,18 32,25 45,25 C32,25 25,32 25,45 C25,32 18,25 5,25 C18,25 25,18 25,5 Z" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                  </svg>
+
+                  {/* Scribbled Arrow pointing to our story video */}
+                  <div className="scrapbook-doodle-arrow-to-video">
+                    <svg width="100" height="70" viewBox="0 0 100 70" fill="none" stroke="currentColor">
+                      <path d="M10,10 C 35,40, 70,30, 85,55" strokeWidth="2.5" strokeLinecap="round" />
+                      <path d="M72,50 L87,57 L85,41" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="scrapbook-doodle-tag">Watch Us! 🎬</span>
+                  </div>
+
+                  {/* Hand-drawn crown floating over the title */}
+                  <svg className="scrapbook-doodle doodle-crown" viewBox="0 0 60 40">
+                    <path d="M10,32 L15,14 L28,24 L35,10 L42,24 L55,14 L60,32 Z" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+
+                  {/* Second cute heart floating on the right side */}
+                  <svg className="scrapbook-doodle doodle-heart-2" viewBox="0 0 50 50">
+                    <path d="M 25 15 C 18 2, 3 2, 3 20 C 3 33, 25 45, 25 45 C 25 45, 47 33, 47 20 C 47 2, 32 2, 25 15 Z" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                  </svg>
+                </div>
+                
                 {/* Sleek Hero Section (Home page-like) */}
-                <div className="about-hero">
+                <div className="about-hero" style={{ position: 'relative' }}>
+                  
+                  {/* Floating 3D Sparkle emoji */}
+                  <div className="scrapbook-inline-doodle" style={{
+                    position: 'absolute',
+                    left: '-25px',
+                    top: '25px',
+                    fontSize: '28px',
+                    animation: 'doodleFloat 4s ease-in-out infinite',
+                    pointerEvents: 'none',
+                    filter: 'drop-shadow(2px 3px 2px rgba(0,0,0,0.2))'
+                  }}>
+                    ✨
+                  </div>
+
+                  {/* Dotted Arrow pointing down to waitlist button */}
+                  <div className="scrapbook-inline-doodle" style={{
+                    position: 'absolute',
+                    right: '-30px',
+                    bottom: '10px',
+                    pointerEvents: 'none',
+                    transform: 'rotate(15deg)'
+                  }}>
+                    <svg viewBox="0 0 100 100" width="55" style={{ color: '#818cf8', opacity: 0.8 }}>
+                      <path d="M 10 10 Q 45 10 50 50 T 80 80" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4,4" strokeLinecap="round" />
+                      <path d="M 68 78 L 80 80 L 78 68" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                    </svg>
+                  </div>
+
                   <div className="about-hero-badge">
                     <span className="about-hero-badge-dot" />
                     Who We Are · Our Mission · Our Story
@@ -1296,9 +1484,13 @@ function App() {
                       Browse Communities →
                     </button>
                   </div>
-                </div>                {/* Curated About Video Section matching the mockup */}
-                <div className="about-video-section">
+                </div>                {/* Curated About Video Section — floats over dark bg, overlaps white section */}
+                <div className="about-video-section" style={{ position: 'relative', zIndex: 20, marginBottom: '-120px' }}>
                   <div className="about-video-wrapper">
+                    {/* Handcrafted scrapbook masking tape and metallic paperclip */}
+                    <div className="scrapbook-tape tape-video-left" />
+                    <div className="scrapbook-tape tape-video-right" />
+                    <div className="scrapbook-paperclip paperclip-video" />
                     <video 
                       src="/about.mp4" 
                       autoPlay 
@@ -1310,16 +1502,64 @@ function App() {
                   </div>
                 </div>
 
-                {/* Our Story Section (Word-by-Word Scroll Reveal) */}
-                <div className="about-story-section">
-                  <h2 className="about-story-header">
+                {/* Our Story Section — white bg starts here, video overlaps from above */}
+                <div className="about-light-content-wrapper" style={{ paddingTop: '140px' }}>
+                  <div className="about-story-section" style={{ position: 'relative', width: '100%', maxWidth: '1150px', margin: '0 auto 80px auto', padding: '0 20px', textAlign: 'center' }}>
+                  <h2 className="about-story-header" style={{ position: 'relative', display: 'inline-block' }}>
                     Our Story
+                    {/* Yellow Sparkles top-right */}
+                    <svg viewBox="0 0 30 30" width="24" className="scrapbook-inline-doodle" style={{ position: 'absolute', right: '-25px', top: '-15px', color: '#ffb703', pointerEvents: 'none' }}>
+                      <path d="M 5 25 L 15 10 M 15 25 L 25 5 M 25 25 L 35 15" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
+                    </svg>
+                    {/* Purple Outline Star below the underline */}
+                    <svg viewBox="0 0 24 24" width="16" fill="none" stroke="#818cf8" strokeWidth="2.5" className="scrapbook-inline-doodle" style={{ position: 'absolute', left: '72px', bottom: '-28px', pointerEvents: 'none' }}>
+                      <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.21l8.2-1.192L12 .587z" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </h2>
-                  <div className="about-story-content">
+
+                  <div className="about-story-content" style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '30px' }}>
+                    
+                    {/* Left Loop Arrow Doodle */}
+                    <svg viewBox="0 0 100 100" width="70" className="scrapbook-inline-doodle" style={{ position: 'absolute', left: '-80px', top: '15px', color: '#a78bfa', opacity: 0.85, pointerEvents: 'none', display: 'block' }}>
+                      <path d="M 80 80 Q 20 80 25 45 T 45 25 T 30 10 T 15 35" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="5,5" strokeLinecap="round" />
+                      <path d="M 8 26 L 15 35 L 25 31" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                    </svg>
+
+                    {/* Right Pink Rays & Star Doodle */}
+                    <div className="scrapbook-inline-doodle" style={{ position: 'absolute', right: '-75px', top: '25px', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+                      <svg viewBox="0 0 40 30" width="32" style={{ color: '#ff4b91' }}>
+                        <path d="M 10 22 L 5 8 M 20 22 L 20 4 M 30 22 L 35 8" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                      </svg>
+                      <svg viewBox="0 0 24 24" width="18" fill="#a78bfa" style={{ color: '#a78bfa', marginTop: '6px' }}>
+                        <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.21l8.2-1.192L12 .587z" />
+                      </svg>
+                    </div>
+
+                    {/* Bottom Left Star & Rays Doodle */}
+                    <div className="scrapbook-inline-doodle" style={{ position: 'absolute', left: '-80px', bottom: '115px', display: 'flex', alignItems: 'center', pointerEvents: 'none' }}>
+                      <svg viewBox="0 0 30 40" width="22" style={{ color: '#ffb703', marginRight: '6px' }}>
+                        <path d="M 22 10 L 8 5 M 22 20 L 5 20 M 22 30 L 8 35" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
+                      </svg>
+                      <svg viewBox="0 0 24 24" width="26" fill="#ffb703" style={{ color: '#ffb703' }}>
+                        <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.21l8.2-1.192L12 .587z" />
+                      </svg>
+                    </div>
+
+                    {/* Bottom Right Blue Loop Arrow & Star Doodle */}
+                    <div className="scrapbook-inline-doodle" style={{ position: 'absolute', right: '-85px', bottom: '105px', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}>
+                      <svg viewBox="0 0 24 24" width="22" fill="none" stroke="#a78bfa" strokeWidth="2.5" style={{ color: '#a78bfa', marginBottom: '8px' }}>
+                        <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.787 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.132 9.21l8.2-1.192L12 .587z" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      <svg viewBox="0 0 100 100" width="55" style={{ color: '#60a5fa' }}>
+                        <path d="M 20 20 C 50 20, 75 40, 55 60 C 45 70, 25 50, 45 30 Q 65 10 70 50" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4,4" strokeLinecap="round" />
+                        <path d="M 60 45 L 70 50 L 73 38" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                      </svg>
+                    </div>
+
                     <ScrollReveal
                       baseOpacity={0.15}
                       enableBlur={true}
-                      baseRotation={2}
+                      baseRotation={0}
                       blurStrength={8}
                       wordAnimationEnd="bottom bottom-=15%"
                     >
@@ -1328,22 +1568,441 @@ function App() {
                     <ScrollReveal
                       baseOpacity={0.15}
                       enableBlur={true}
-                      baseRotation={2}
+                      baseRotation={0}
                       blurStrength={8}
                       wordAnimationEnd="bottom bottom-=15%"
                     >
                       From casual coffee meetups and gaming nights to fitness sessions and community events, 2gather helps people find their crowd and live in the moment.
                     </ScrollReveal>
+
+                    {/* Horizontal Scrapbook Cards Collage (Cross-way wave progression) */}
+                    <div className="scrapbook-cards-row" style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginTop: '55px',
+                      width: '100%',
+                      maxWidth: '960px',
+                      flexWrap: 'wrap',
+                      position: 'relative',
+                      zIndex: 3,
+                      gap: '0px', // Handled by negative margins for overlapping look
+                      paddingBottom: '20px'
+                    }}>
+                      
+                      {/* Card 1: Smallest, Far Left, Tilted Right */}
+                      <div className="scrapbook-paper-card" style={{
+                        width: '170px',
+                        background: theme === 'light' ? '#faf9f6' : '#1e1b4b',
+                        border: theme === 'light' ? '3px solid #1e293b' : '3px solid #ffffff',
+                        boxShadow: theme === 'light' ? '5px 5px 0px #1e293b' : '5px 5px 0px #818cf8',
+                        padding: '10px 10px 12px 10px',
+                        transform: 'rotate(6deg) translateY(18px)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        borderRadius: '8px',
+                        zIndex: 2,
+                        margin: '10px -8px',
+                        transition: 'transform 0.3s ease-in-out'
+                      }}>
+                        <div style={{
+                          position: 'absolute',
+                          top: '-12px',
+                          left: '35%',
+                          transform: 'rotate(-8deg)',
+                          width: '70px',
+                          height: '22px',
+                          background: 'rgba(16, 185, 129, 0.65)', // Mint green tape
+                          borderLeft: '1px dashed rgba(0,0,0,0.1)',
+                          borderRight: '1px dashed rgba(0,0,0,0.1)',
+                          zIndex: 4
+                        }} />
+                        <div style={{ width: '100%', aspectRatio: '1.2', overflow: 'hidden', border: theme === 'light' ? '2px solid #1e293b' : '2px solid #ffffff', borderRadius: '4px' }}>
+                          <img src="/tribe.png" alt="acoustic memory" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        </div>
+                        <div style={{ fontFamily: "'Caveat', cursive, sans-serif", fontSize: '18px', fontWeight: 'bold', color: theme === 'light' ? '#1e293b' : '#ffffff', marginTop: '8px', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                          acoustic jams 🎸
+                        </div>
+                      </div>
+
+                      {/* Card 2: Medium-Small, Center-Left, Tilted Left */}
+                      <div className="scrapbook-paper-card" style={{
+                        width: '200px',
+                        background: theme === 'light' ? '#faf9f6' : '#1e1b4b',
+                        border: theme === 'light' ? '3px solid #1e293b' : '3px solid #ffffff',
+                        boxShadow: theme === 'light' ? '6px 6px 0px #1e293b' : '6px 6px 0px #818cf8',
+                        padding: '12px 12px 14px 12px',
+                        transform: 'rotate(-5deg) translateY(6px)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        borderRadius: '8px',
+                        zIndex: 3,
+                        margin: '10px -8px',
+                        transition: 'transform 0.3s ease-in-out'
+                      }}>
+                        <div style={{
+                          position: 'absolute',
+                          top: '-15px',
+                          left: '25%',
+                          transform: 'rotate(-14deg)',
+                          width: '85px',
+                          height: '25px',
+                          background: 'rgba(239, 68, 68, 0.65)', // Pink/Coral tape
+                          borderLeft: '1px dashed rgba(0,0,0,0.1)',
+                          borderRight: '1px dashed rgba(0,0,0,0.1)',
+                          zIndex: 4
+                        }} />
+                        <div style={{ width: '100%', aspectRatio: '1.2', overflow: 'hidden', border: theme === 'light' ? '2px solid #1e293b' : '2px solid #ffffff', borderRadius: '4px' }}>
+                          <img src="/tribe1.png" alt="cafe memory" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        </div>
+                        <div style={{ fontFamily: "'Caveat', cursive, sans-serif", fontSize: '20px', fontWeight: 'bold', color: theme === 'light' ? '#1e293b' : '#ffffff', marginTop: '10px', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                          cafe meetups ☕
+                        </div>
+                      </div>
+
+                      {/* Card 3: Large Centerpiece, Center-Right, Tilted Right */}
+                      <div className="scrapbook-paper-card" style={{
+                        width: '260px',
+                        background: theme === 'light' ? '#faf9f6' : '#1e1b4b',
+                        border: theme === 'light' ? '3px solid #1e293b' : '3px solid #ffffff',
+                        boxShadow: theme === 'light' ? '9px 9px 0px #1e293b' : '9px 9px 0px #818cf8',
+                        padding: '14px 14px 16px 14px',
+                        transform: 'rotate(3deg) translateY(-12px)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        borderRadius: '8px',
+                        zIndex: 5,
+                        margin: '10px -8px',
+                        transition: 'transform 0.3s ease-in-out'
+                      }}>
+                        <div style={{
+                          position: 'absolute',
+                          top: '-18px',
+                          left: '50%',
+                          transform: 'translateX(-50%) rotate(4deg)',
+                          width: '115px',
+                          height: '32px',
+                          background: 'rgba(251, 191, 36, 0.8)', // Glowing gold tape
+                          borderLeft: '1.5px dashed rgba(0,0,0,0.12)',
+                          borderRight: '1.5px dashed rgba(0,0,0,0.12)',
+                          zIndex: 5
+                        }} />
+                        <div style={{ width: '100%', aspectRatio: '1.25', overflow: 'hidden', border: theme === 'light' ? '2px solid #1e293b' : '2px solid #ffffff', borderRadius: '4px' }}>
+                          <img src="/tribe.png" alt="picnic memory" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        </div>
+                        <div style={{ fontFamily: "'Caveat', cursive, sans-serif", fontSize: '23px', fontWeight: 'bold', color: theme === 'light' ? '#1e293b' : '#ffffff', marginTop: '12px', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                          picnics & good vibes ⛺
+                        </div>
+                      </div>
+
+                      {/* Card 4: Medium, Far Right, Tilted Left */}
+                      <div className="scrapbook-paper-card" style={{
+                        width: '215px',
+                        background: theme === 'light' ? '#faf9f6' : '#1e1b4b',
+                        border: theme === 'light' ? '3px solid #1e293b' : '3px solid #ffffff',
+                        boxShadow: theme === 'light' ? '7px 7px 0px #1e293b' : '7px 7px 0px #818cf8',
+                        padding: '12px 12px 14px 12px',
+                        transform: 'rotate(-4deg) translateY(4px)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        borderRadius: '8px',
+                        zIndex: 4,
+                        margin: '10px -8px',
+                        transition: 'transform 0.3s ease-in-out'
+                      }}>
+                        <div style={{
+                          position: 'absolute',
+                          top: '-15px',
+                          right: '20%',
+                          transform: 'rotate(10deg)',
+                          width: '95px',
+                          height: '27px',
+                          background: 'rgba(59, 130, 246, 0.65)', // Sky blue tape
+                          borderLeft: '1px dashed rgba(0,0,0,0.1)',
+                          borderRight: '1px dashed rgba(0,0,0,0.1)',
+                          zIndex: 4
+                        }} />
+                        <div style={{ width: '100%', aspectRatio: '1.2', overflow: 'hidden', border: theme === 'light' ? '2px solid #1e293b' : '2px solid #ffffff', borderRadius: '4px' }}>
+                          <img src="/tribe1.png" alt="game night memory" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        </div>
+                        <div style={{ fontFamily: "'Caveat', cursive, sans-serif", fontSize: '21px', fontWeight: 'bold', color: theme === 'light' ? '#1e293b' : '#ffffff', marginTop: '10px', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                          game nights & fun 🎲
+                        </div>
+                      </div>
+
+                    </div>
+
+                    {/* Notepad Sheet: Your Event. Your Rules. */}
+                    <div className="scrapbook-notepad-sheet" style={{
+                      margin: '60px auto 10px auto',
+                      width: '100%',
+                      maxWidth: '680px',
+                      background: theme === 'light' ? '#fefeb9' : '#1e1b4b', // light yellow notepad vs indigo
+                      border: theme === 'light' ? '3px solid #1e293b' : '3px solid #ffffff',
+                      boxShadow: theme === 'light' ? '8px 8px 0px #1e293b' : '8px 8px 0px #818cf8',
+                      padding: '32px 32px 28px 32px',
+                      // sketchy, hand-drawn paper corner curvature
+                      borderRadius: '255px 15px 225px 15px/15px 225px 15px 255px',
+                      position: 'relative',
+                      textAlign: 'center',
+                      zIndex: 3,
+                      boxSizing: 'border-box',
+                      transform: 'rotate(0.5deg)'
+                    }}>
+                      
+                      {/* Realistic 3D Push Pin pinning the notepad */}
+                      <div className="scrapbook-pin" style={{
+                        position: 'absolute',
+                        top: '-20px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '32px',
+                        height: '32px',
+                        zIndex: 10,
+                        filter: 'drop-shadow(2px 3px 2px rgba(0,0,0,0.35))',
+                        pointerEvents: 'none'
+                      }}>
+                        <svg viewBox="0 0 100 100" width="32" height="32">
+                          <ellipse cx="50" cy="30" rx="20" ry="12" fill="#ef4444" />
+                          <rect x="35" y="30" width="30" height="20" rx="3" fill="#dc2626" />
+                          <polygon points="35,50 45,65 55,65 65,50" fill="#b91c1c" />
+                          <ellipse cx="45" cy="26" rx="8" ry="4" fill="rgba(255,255,255,0.4)" />
+                          <rect x="47" y="65" width="6" height="25" rx="1" fill="#94a3b8" />
+                          <polygon points="47,90 50,97 53,90" fill="#64748b" />
+                        </svg>
+                      </div>
+
+                      {/* Spiral notebook rings along the top edge */}
+                      <div style={{
+                        position: 'absolute',
+                        top: '-12px',
+                        left: '50px',
+                        right: '50px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        pointerEvents: 'none'
+                      }}>
+                        {[...Array(6)].map((_, i) => (
+                          <div key={i} style={{
+                            width: '8px',
+                            height: '24px',
+                            background: theme === 'light' ? '#64748b' : '#94a3b8',
+                            borderRadius: '4px',
+                            border: '1.5px solid #1e293b',
+                            boxShadow: '1px 2px 2px rgba(0,0,0,0.15)',
+                            transform: 'rotate(-8deg)'
+                          }} />
+                        ))}
+                      </div>
+
+                      {/* Red margin line on the left to make it look like a notebook paper */}
+                      {theme === 'light' && (
+                        <div style={{
+                          position: 'absolute',
+                          left: '22px',
+                          top: '0',
+                          bottom: '0',
+                          width: '2px',
+                          background: 'rgba(239, 68, 68, 0.45)',
+                        }} />
+                      )}
+
+                      {/* Hand-drawn mini star doodle bottom-right */}
+                      <svg viewBox="0 0 24 24" width="22" className="scrapbook-inline-doodle" style={{
+                        position: 'absolute',
+                        right: '15px',
+                        bottom: '12px',
+                        color: '#f59e0b',
+                        transform: 'rotate(15deg)',
+                        pointerEvents: 'none'
+                      }}>
+                        <path d="M12 1.5l3.09 6.3 6.91 1-5 4.87 1.18 6.88-6.18-3.25-6.18 3.25 1.18-6.88-5-4.87 6.91-1z" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+
+                      {/* Hand-drawn mini heart doodle top-left */}
+                      <svg viewBox="0 0 24 24" width="20" className="scrapbook-inline-doodle" style={{
+                        position: 'absolute',
+                        left: '32px',
+                        top: '25px',
+                        color: '#ec4899',
+                        transform: 'rotate(-12deg)',
+                        pointerEvents: 'none'
+                      }}>
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+
+                      <h3 style={{
+                        fontFamily: "'Poppins', sans-serif",
+                        fontSize: 'clamp(20px, 3.5vw, 28px)',
+                        fontWeight: '850',
+                        color: theme === 'light' ? '#1e293b' : '#ffffff',
+                        marginBottom: '14px',
+                        letterSpacing: '-0.01em',
+                        textTransform: 'uppercase'
+                      }}>
+                        Your Event. Your Rules.
+                      </h3>
+                      <p style={{
+                        fontFamily: "'Poppins', sans-serif",
+                        fontSize: 'clamp(14px, 2.2vw, 16px)',
+                        fontWeight: '550',
+                        lineHeight: '1.65',
+                        color: theme === 'light' ? '#334155' : '#e2e8f0',
+                        margin: 0,
+                        paddingLeft: theme === 'light' ? '16px' : '0'
+                      }}>
+                        Create public or private events, host meetups your way, and manage everything with full control. Whether it’s a free community hangout or a paid experience, 2gather lets you organize events with{' '}
+                        <span style={{
+                          position: 'relative',
+                          display: 'inline-block',
+                          padding: '0 4px',
+                          zIndex: 1,
+                          fontWeight: '750',
+                          color: theme === 'light' ? '#0f172a' : '#ffffff'
+                        }}>
+                          <span style={{
+                            position: 'absolute',
+                            left: 0,
+                            right: 0,
+                            top: '15%',
+                            bottom: '10%',
+                            background: theme === 'light' ? 'rgba(251, 191, 36, 0.45)' : 'rgba(251, 191, 36, 0.3)', // gold highlight
+                            transform: 'rotate(-1.5deg) skewX(-10deg)',
+                            zIndex: -1,
+                            borderRadius: '2px'
+                          }} />
+                          zero platform charges
+                        </span>
+                        .
+                      </p>
+                    </div>
+
+                    {/* Animated Scroll Down Indicator */}
+                    <div className="scrapbook-scroll-indicator" style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '4px',
+                      marginTop: '25px',
+                      pointerEvents: 'none',
+                      animation: 'doodleFloat 2.5s ease-in-out infinite'
+                    }}>
+                      <span style={{
+                        fontFamily: "'Caveat', cursive, sans-serif",
+                        fontSize: '18px',
+                        fontWeight: 'bold',
+                        color: theme === 'light' ? '#64748b' : '#94a3b8'
+                      }}>
+                        scroll to explore more
+                      </span>
+                      <span style={{ fontSize: '20px', animation: 'doodleWiggle 1.5s ease-in-out infinite' }}>👇</span>
+                    </div>
+
+                  </div>
+                </div>
+                {/* Connecting Curved Dotted Arrow Doodle */}
+                <div className="scrapbook-inline-doodle" style={{ 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  margin: '20px auto 10px auto', 
+                  pointerEvents: 'none', 
+                  maxWidth: '1200px', 
+                  width: '100%', 
+                  position: 'relative' 
+                }}>
+                  <svg viewBox="0 0 200 60" width="180" style={{ color: '#a78bfa', transform: 'rotate(2deg)' }}>
+                    <path d="M 20 10 C 60 40, 140 40, 180 15" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4,4" strokeLinecap="round" />
+                    <path d="M 166 12 L 180 15 L 175 28" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                  </svg>
+                  {/* Small cute sparkles heart */}
+                  <span style={{ position: 'absolute', top: '15px', fontSize: '18px', animation: 'doodleWiggle 3s ease-in-out infinite' }}>💖</span>
+                </div>
+
+                {/* Premium Interactive Bounce Cards Section (Split Layout) */}
+                <div className="about-bounce-cards-section" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', margin: '40px auto', width: '100%', maxWidth: '1200px', gap: '48px', padding: '0 24px', flexWrap: 'wrap', position: 'relative' }}>
+                  
+                  {/* Floating 3D smiley emoji on the side */}
+                  <div className="scrapbook-inline-doodle" style={{
+                    position: 'absolute',
+                    left: '-35px',
+                    top: '-20px',
+                    fontSize: '28px',
+                    animation: 'doodleFloat 5s ease-in-out infinite',
+                    pointerEvents: 'none',
+                    filter: 'drop-shadow(2px 3px 2px rgba(0,0,0,0.15))'
+                  }}>
+                    🥰
+                  </div>
+
+                  {/* Left Column: Premium Left-Aligned Text Content */}
+                  <div className="about-bounce-cards-text-col" style={{ flex: '1.2', minWidth: '320px', textAlign: 'left' }}>
+                    <h2 className="about-section-header" style={{ marginBottom: '24px', fontSize: 'clamp(28px, 4.5vw, 42px)', fontWeight: '850', lineHeight: '1.1', position: 'relative' }}>
+                      What Makes 2gather Different?
+                    </h2>
+                    <p className="about-section-subheader" style={{ fontSize: '16.5px', lineHeight: '1.8', opacity: 0.95, maxWidth: '580px', margin: '0', wordSpacing: '0.01em', letterSpacing: '-0.01em', textAlign: 'left' }}>
+                      Endless scrolling? <span style={{ textDecoration: 'line-through', opacity: 0.55 }}>Not our vibe.</span> <span style={{ color: '#2563eb', fontWeight: '800' }}>2gather</span> is where you actually <span className="genz-highlight-tag" style={{ background: '#ff4b91', color: '#ffffff', padding: '2px 10px', borderRadius: '12px', fontWeight: '800', fontSize: '13.5px', display: 'inline-block', transform: 'rotate(-2deg)', boxShadow: '2px 2px 0px #000', border: '1.5px solid #000', margin: '0 4px' }}>step outside</span>, meet cool people, and build real-world memories.
+                      <br /><br />
+                      Whether it’s <span style={{ borderBottom: '2.5px dashed #ff4b91', paddingBottom: '1px', fontWeight: '700' }}>curated tribes ⛺</span>, acoustic jam rooms 🎸, cozy café hops ☕, or retro board game nights 🎲 — everything is crafted to feel completely natural, safe, and positive.
+                      <br /><br />
+                      Best part? You can <span style={{ background: 'rgba(59, 130, 246, 0.12)', border: '1px dashed #2563eb', padding: '2px 8px', borderRadius: '8px', fontWeight: '700', color: '#1d4ed8', display: 'inline-block', margin: '0 4px' }}>host your own events</span> 100% free with <span style={{ fontWeight: '800', color: '#10b981' }}>zero platform charges 💸</span>. Always about good vibes and real community connections.
+                    </p>
+
+                    {/* Dotted Loop Arrow pointing to the right BounceCards */}
+                    <div className="scrapbook-inline-doodle" style={{ 
+                      position: 'absolute', 
+                      right: '42%', 
+                      top: '50%', 
+                      transform: 'translateY(-50%) rotate(5deg)', 
+                      pointerEvents: 'none',
+                      zIndex: 2
+                    }}>
+                      <svg viewBox="0 0 100 60" width="80" style={{ color: '#ff4b91' }}>
+                        <path d="M 10 30 Q 50 -5 90 30" fill="none" stroke="currentColor" strokeWidth="2.5" strokeDasharray="3,3" strokeLinecap="round" />
+                        <path d="M 76 20 L 90 30 L 78 40" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                      </svg>
+                      {/* Floating peace emoji */}
+                      <span style={{ position: 'absolute', top: '-15px', left: '35px', fontSize: '16px', animation: 'doodleFloat 3.5s ease-in-out infinite' }}>✌️</span>
+                    </div>
+
+                  </div>
+
+                  {/* Right Column: Interactive Card Component */}
+                  <div className="about-bounce-cards-component-col" style={{ flex: '0.8', display: 'flex', justifyContent: 'center', minWidth: '320px', pointerEvents: 'auto' }}>
+                    <BounceCards
+                      images={[
+                        '/tribe.png',
+                        '/tribe1.png',
+                        '/adventure_banner.png',
+                        '/creative_banner.png',
+                        '/tech_banner.png'
+                      ]}
+                      containerWidth={500}
+                      containerHeight={280}
+                      enableHover={true}
+                    />
                   </div>
                 </div>
 
                 {/* 3D Curved Memories Centerpiece (ThreeDSlider) */}
                 <div className="about-gallery-section" style={{ marginTop: '60px' }}>
                   <h2 className="about-section-header">
-                    Our Tribe Memories
+                    Your Tribe Is Out There
                   </h2>
-                  <p className="about-section-subheader">
-                    Drag, swipe, or use your scroll wheel to spin through our active real-world meetups.
+                  <p className="about-section-subheader" style={{
+                    fontFamily: "'Caveat', cursive, sans-serif",
+                    fontSize: 'clamp(22px, 3.5vw, 28px)',
+                    fontWeight: 'bold',
+                    color: theme === 'light' ? '#475569' : '#cbd5e1',
+                    lineHeight: '1.4',
+                    maxWidth: '720px',
+                    margin: '10px auto 28px auto'
+                  }}>
+                    Explore circles filled with shared interests, genuine conversations, and experiences worth showing up for.
                   </p>
                   <ThreeDSlider
                     items={galleryMemories.map((item, index) => ({
@@ -1358,7 +2017,8 @@ function App() {
                   textColor={theme === 'dark' ? '#ffffff' : '#0f172a'} 
                   borderColor={theme === 'dark' ? 'rgba(255,255,255,0.08)' : '#e2e8f0'} 
                 />
-              </div>
+              </div> {/* Close about-light-content-wrapper */}
+            </div> {/* Close about-page-container */}
               
               <Footer onDownload={() => setShowWaitlist(true)} />
             </div>
@@ -1665,7 +2325,7 @@ function App() {
                       <button
                         key={city}
                         type="button"
-                        className="events-hero-pill"
+                        className={`events-hero-pill ${selectedCity === city ? 'active' : ''} pill-${city.toLowerCase()}`}
                         onClick={() => {
                           setSelectedCity(city);
                           scrollToEvents();
@@ -1804,13 +2464,68 @@ function App() {
 
                   {filteredEvents.length > 0 ? (
                     <div className="events-grid">
+                      {/* Host Your Own Gathering Card */}
+                      <div 
+                        className="event-card host-gathering-card" 
+                        onClick={() => setShowHostModal(true)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <div className="host-card-header">
+                          <div className="host-card-ambient-glow" />
+                          <div className="host-card-illustration">
+                            <span className="host-card-emoji">⛺</span>
+                          </div>
+                          <div className="host-card-badge">CREATE A VIBE</div>
+                        </div>
+                        
+                        <div className="host-card-body">
+                          <h4 className="host-card-title">Host Your Own Gathering</h4>
+                          <p className="host-card-desc">
+                            Have an idea for a sunset hangout, cafe crawl, sports meetup, or tech session? Pitch it, limit spots, and host it!
+                          </p>
+                          
+                          <div className="host-card-features">
+                            <div className="host-feature-item">
+                              <span className="host-feature-dot">✦</span>
+                              <span>Choose any date & time</span>
+                            </div>
+                            <div className="host-feature-item">
+                              <span className="host-feature-dot">✦</span>
+                              <span>Set max seats & approve guests</span>
+                            </div>
+                            <div className="host-feature-item">
+                              <span className="host-feature-dot">✦</span>
+                              <span>Assemble your offline tribe</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="host-card-footer">
+                          <button 
+                            type="button" 
+                            className="host-card-action-btn"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setShowHostModal(true);
+                            }}
+                          >
+                            <span>➕</span> Host a Gathering
+                          </button>
+                        </div>
+                      </div>
+
                       {filteredEvents.map((event) => {
                         const spotsLeft = event.spotsTotal - event.spotsFilled;
                         const fillPercent = (event.spotsFilled / event.spotsTotal) * 100;
                         const isFull = spotsLeft <= 0;
 
                         return (
-                          <div className="event-card" key={event.id}>
+                          <div 
+                            className="event-card" 
+                            key={event.id}
+                            onClick={() => setSelectedEvent(event)}
+                            style={{ cursor: 'pointer' }}
+                          >
                             <div 
                               className="event-card-header"
                               style={{ 
@@ -1875,7 +2590,8 @@ function App() {
                                 type="button" 
                                 className={`event-join-btn ${isFull ? 'spots-full' : ''}`}
                                 disabled={isFull}
-                                onClick={() => {
+                                onClick={(e) => {
+                                  e.stopPropagation();
                                   if (!isFull) {
                                     openWaitlist(
                                       `SECURE SPOT AT ${event.title.toUpperCase()}`,
@@ -1912,137 +2628,9 @@ function App() {
                 <Footer onDownload={() => openWaitlist()} />
               </div>
 
-              {/* Host an Event Modal */}
-              {showHostModal && (
-                <div className="host-modal-overlay" onClick={() => setShowHostModal(false)}>
-                  <div className="host-modal" onClick={(e) => e.stopPropagation()}>
-                    <button 
-                      type="button" 
-                      className="host-modal-close"
-                      onClick={() => setShowHostModal(false)}
-                    >
-                      ✕
-                    </button>
-                    <h3 className="host-modal-title">Host a Local Gathering</h3>
-                    <p className="host-modal-desc">
-                      Create an event, gather interesting people in your city, and make new friends in the real world.
-                    </p>
 
-                    <form onSubmit={handleHostSubmit}>
-                      <div className="host-form-group full-width" style={{ marginBottom: '16px' }}>
-                        <label>EVENT TITLE</label>
-                        <input 
-                          type="text" 
-                          placeholder="e.g. Founders Morning Coffee or Boardgames Night"
-                          value={newEvent.title}
-                          onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-                          required
-                        />
-                      </div>
 
-                      <div className="host-form-grid">
-                        <div className="host-form-group">
-                          <label>CITY</label>
-                          <select 
-                            value={newEvent.city}
-                            onChange={(e) => setNewEvent({ ...newEvent, city: e.target.value })}
-                          >
-                            {['PUNE', 'BANGALORE', 'MUMBAI', 'DELHI', 'HYDERABAD'].map(c => (
-                              <option key={c} value={c}>{c}</option>
-                            ))}
-                          </select>
-                        </div>
-                        
-                        <div className="host-form-group">
-                          <label>CATEGORY</label>
-                          <select 
-                            value={newEvent.category}
-                            onChange={(e) => setNewEvent({ ...newEvent, category: e.target.value })}
-                          >
-                            {['TECH', 'SOCIAL', 'WELLNESS', 'CREATIVE', 'ADVENTURE'].map(cat => (
-                              <option key={cat} value={cat}>{cat}</option>
-                            ))}
-                          </select>
-                        </div>
-                      </div>
 
-                      <div className="host-form-grid">
-                        <div className="host-form-group">
-                          <label>DATE</label>
-                          <input 
-                            type="text" 
-                            placeholder="e.g. Sat, May 30"
-                            value={newEvent.date}
-                            onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })}
-                            required
-                          />
-                        </div>
-                        
-                        <div className="host-form-group">
-                          <label>TIME</label>
-                          <input 
-                            type="text" 
-                            placeholder="e.g. 6:30 PM"
-                            value={newEvent.time}
-                            onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })}
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="host-form-grid">
-                        <div className="host-form-group">
-                          <label>EXACT VENUE / LOCATION</label>
-                          <input 
-                            type="text" 
-                            placeholder="e.g. Third Wave Coffee, KP"
-                            value={newEvent.location}
-                            onChange={(e) => setNewEvent({ ...newEvent, location: e.target.value })}
-                            required
-                          />
-                        </div>
-                        
-                        <div className="host-form-group">
-                          <label>MAX SPOTS AVAILABLE</label>
-                          <input 
-                            type="number" 
-                            min="2"
-                            max="100"
-                            value={newEvent.spotsTotal}
-                            onChange={(e) => setNewEvent({ ...newEvent, spotsTotal: parseInt(e.target.value) || 20 })}
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div className="host-form-group full-width" style={{ marginBottom: '16px' }}>
-                        <label>PRICE (Optional)</label>
-                        <input 
-                          type="text" 
-                          placeholder="e.g. Free or ₹200 for coffee"
-                          value={newEvent.price}
-                          onChange={(e) => setNewEvent({ ...newEvent, price: e.target.value })}
-                        />
-                      </div>
-
-                      <div className="host-form-group full-width" style={{ marginBottom: '16px' }}>
-                        <label>DESCRIPTION</label>
-                        <textarea 
-                          placeholder="Tell people what this gathering is about, who should join, and what you will do."
-                          rows="3"
-                          value={newEvent.description}
-                          onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
-                          required
-                        />
-                      </div>
-
-                      <button type="submit" className="host-submit-btn">
-                        LAUNCH GATHERING 🚀
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              )}
 
             </div>
           )}
@@ -2082,24 +2670,56 @@ function App() {
           {activeTab === 'communities' && (
             <div className="tribes-view-container" style={{ width: '100%', position: 'relative', background: '#000', minHeight: '100vh', overflow: 'hidden' }}>
               
-              {/* Layered Background System */}
+              {/* Layered Background System with Video + tribe1.png */}
               <div className="tribes-bg-layer" style={{ position: 'absolute', top: 0, left: 0, width: '100%', zIndex: 0, pointerEvents: 'none' }}>
-                {/* tribe.png at the top */}
+                {/* Cinematic loop background or static premium image for light theme */}
                 <div style={{ 
+                  position: 'relative',
                   width: '100%', 
                   height: '0', 
-                  paddingBottom: '56.25%', // Maintain aspect ratio
-                  backgroundImage: 'url("/tribe.png")', 
-                  backgroundSize: '100% auto', 
-                  backgroundRepeat: 'no-repeat' 
-                }} />
+                  paddingBottom: '56.25%', // Locked to 16:9 aspect ratio
+                  overflow: 'hidden'
+                }}>
+                  {theme === 'light' ? (
+                    <img 
+                      src="/tribeslighttheme1.jpeg" 
+                      alt="Tribes Background"
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        opacity: 0.85
+                      }}
+                    />
+                  ) : (
+                    <video 
+                      src="/tribalvideo.mp4" 
+                      autoPlay 
+                      loop 
+                      muted 
+                      playsInline 
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        opacity: 0.65
+                      }}
+                    />
+                  )}
+                </div>
                 
-                {/* tribe1.png following tribe.png */}
+                {/* tribeslighttheme2.jpeg (light theme) or tribe1.png (dark theme) following the top section exactly */}
                 <div style={{ 
                   width: '100%', 
                   height: '0', 
                   paddingBottom: '65%', 
-                  backgroundImage: 'url("/tribe1.png")', 
+                  backgroundImage: `url(${theme === 'light' ? '/tribeslighttheme2.jpeg' : '/tribe1.png'})`, 
                   backgroundSize: '100% auto', 
                   backgroundRepeat: 'no-repeat',
                   marginTop: '-1px',
@@ -2110,7 +2730,7 @@ function App() {
                 <div style={{ 
                   position: 'absolute', 
                   inset: 0, 
-                  background: 'linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.95) 100%)',
+                  background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.95) 100%)',
                   zIndex: 1
                 }} />
               </div>
@@ -2128,15 +2748,308 @@ function App() {
         </div>
 
         {/* Mobile Social Links Overlay */}
-        <div className="mobile-socials" style={{ display: 'none' }}>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="side-link">
-            GITHUB
-          </a>
-          <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="side-link">
-            DISCORD
-          </a>
-        </div>
+        {activeTab !== 'contact' && (
+          <div className="mobile-socials" style={{ display: 'none' }}>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="side-link">
+              GITHUB
+            </a>
+            <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="side-link">
+              DISCORD
+            </a>
+          </div>
+        )}
       </main>
+
+      {/* Event Details Dialog Modal (Landscape Layout - Rendered globally at root viewport context) */}
+      {selectedEvent && (() => {
+        const spotsLeft = selectedEvent.spotsTotal - selectedEvent.spotsFilled;
+        const fillPercent = (selectedEvent.spotsFilled / selectedEvent.spotsTotal) * 100;
+        const isFull = spotsLeft <= 0;
+        return (
+          <div className="event-details-modal-overlay" onClick={() => setSelectedEvent(null)}>
+            <div className="event-details-modal landscape" onClick={(e) => e.stopPropagation()}>
+              <button 
+                type="button" 
+                className="event-details-close-btn"
+                onClick={() => setSelectedEvent(null)}
+              >
+                ✕
+              </button>
+
+              <div className="event-details-landscape-grid">
+                {/* Left Side: Cinematic Banner Cover */}
+                <div 
+                  className="event-details-banner-side"
+                  style={{ 
+                    backgroundImage: `url(${getCategoryImg(selectedEvent.category)})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                >
+                  <div className="event-details-banner-overlay" />
+                  <div className="event-details-banner-content">
+                    <div className="event-details-tags">
+                      <span className="event-tag-city">{selectedEvent.city}</span>
+                      <span className="event-tag-cat">{selectedEvent.category}</span>
+                    </div>
+                    <h2 className="event-details-title">{selectedEvent.title}</h2>
+                  </div>
+                </div>
+
+                {/* Right Side: Information & Actions */}
+                <div className="event-details-content-side">
+                  <div className="event-details-body">
+                    
+                    {/* Time & Venue & Price Block */}
+                    <div className="event-details-quick-info">
+                      <div className="quick-info-item">
+                        <span className="quick-info-icon">📅</span>
+                        <div className="quick-info-text-wrap">
+                          <span className="quick-info-label">Date & Day</span>
+                          <span className="quick-info-val">{selectedEvent.date}</span>
+                        </div>
+                      </div>
+                      
+                      <div className="quick-info-item">
+                        <span className="quick-info-icon">🕗</span>
+                        <div className="quick-info-text-wrap">
+                          <span className="quick-info-label">Start Time</span>
+                          <span className="quick-info-val">{selectedEvent.time}</span>
+                        </div>
+                      </div>
+
+                      <div className="quick-info-item">
+                        <span className="quick-info-icon">📍</span>
+                        <div className="quick-info-text-wrap">
+                          <span className="quick-info-label">Exact Location</span>
+                          <span className="quick-info-val">{selectedEvent.location}</span>
+                        </div>
+                      </div>
+
+                      <div className="quick-info-item">
+                        <span className="quick-info-icon">💰</span>
+                        <div className="quick-info-text-wrap">
+                          <span className="quick-info-label">Contribution</span>
+                          <span className="quick-info-val">{selectedEvent.price}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="event-details-description">
+                      <h4>About this Gathering</h4>
+                      <p>{selectedEvent.description}</p>
+                    </div>
+
+                    {/* Host Information */}
+                    <div className="event-details-host-section">
+                      <h4>Sync Coordinator</h4>
+                      <div className="details-host-card">
+                        <span className="details-host-avatar">{selectedEvent.hostAvatar}</span>
+                        <div className="details-host-text">
+                          <span className="details-host-name">{selectedEvent.hostName}</span>
+                          <span className="details-host-tag">Verified 2gather Organizer</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Attendance Tracker */}
+                    <div className="event-details-spots-section">
+                      <div className="details-spots-header">
+                        <h4>Ambient Crowd Capacity</h4>
+                        <span className="spots-ratio">{selectedEvent.spotsFilled} of {selectedEvent.spotsTotal} spots taken</span>
+                      </div>
+                      
+                      <div className="event-spots-bar-bg" style={{ height: '8px', margin: '8px 0 0 0' }}>
+                        <div 
+                          className="event-spots-bar-fill" 
+                          style={{ 
+                            width: `${fillPercent}%`,
+                            background: isFull ? '#ef4444' : (spotsLeft <= 5 ? '#f59e0b' : '#25d366'),
+                            height: '100%'
+                          }}
+                        />
+                      </div>
+                      
+                      {!isFull ? (
+                        <p className="spots-alert-text">🔥 Only {spotsLeft} places left! Secure your spot immediately.</p>
+                      ) : (
+                        <p className="spots-alert-text full">⚠️ Spots are completely full. Join the waitlist for future runs!</p>
+                      )}
+                    </div>
+
+                  </div>
+
+                  {/* Modal Footer / Call to Action */}
+                  <div className="event-details-footer">
+                    <button 
+                      type="button" 
+                      className="event-details-cancel-btn"
+                      onClick={() => setSelectedEvent(null)}
+                    >
+                      Close Details
+                    </button>
+                    
+                    <button 
+                      type="button" 
+                      className={`event-details-join-btn ${isFull ? 'spots-full' : ''}`}
+                      disabled={isFull}
+                      onClick={() => {
+                        if (!isFull) {
+                          const titleForWaitlist = selectedEvent.title;
+                          const hostForWaitlist = selectedEvent.hostName;
+                          const cityForWaitlist = selectedEvent.city;
+                          setSelectedEvent(null);
+                          openWaitlist(
+                            `SECURE SPOT AT ${titleForWaitlist.toUpperCase()}`,
+                            `Submit your email to join the waitlist for this gathering in ${cityForWaitlist}. Host ${hostForWaitlist} will approve your request shortly.`
+                          );
+                        }
+                      }}
+                    >
+                      {isFull ? 'Spots Full' : 'Request to Join Activity 🚀'}
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Host an Event Modal (Rendered globally at root viewport context to resolve scroll bug) */}
+      {showHostModal && (
+        <div className="host-modal-overlay" onClick={() => setShowHostModal(false)}>
+          <div className="host-modal" onClick={(e) => e.stopPropagation()}>
+            <button 
+              type="button" 
+              className="host-modal-close"
+              onClick={() => setShowHostModal(false)}
+            >
+              ✕
+            </button>
+            <h3 className="host-modal-title">Host a Local Gathering</h3>
+            <p className="host-modal-desc">
+              Create an event, gather interesting people in your city, and make new friends in the real world.
+            </p>
+
+            <form onSubmit={handleHostSubmit}>
+              <div className="host-form-group full-width" style={{ marginBottom: '16px' }}>
+                <label>EVENT TITLE</label>
+                <input 
+                  type="text" 
+                  placeholder="e.g. Founders Morning Coffee or Boardgames Night"
+                  value={newEvent.title}
+                  onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="host-form-grid">
+                <div className="host-form-group">
+                  <label>CITY</label>
+                  <select 
+                    value={newEvent.city}
+                    onChange={(e) => setNewEvent({ ...newEvent, city: e.target.value })}
+                  >
+                    {['PUNE', 'BANGALORE', 'MUMBAI', 'DELHI', 'HYDERABAD'].map(c => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div className="host-form-group">
+                  <label>CATEGORY</label>
+                  <select 
+                    value={newEvent.category}
+                    onChange={(e) => setNewEvent({ ...newEvent, category: e.target.value })}
+                  >
+                    {['TECH', 'SOCIAL', 'WELLNESS', 'CREATIVE', 'ADVENTURE'].map(cat => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="host-form-grid">
+                <div className="host-form-group">
+                  <label>DATE</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Sat, May 30"
+                    value={newEvent.date}
+                    onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })}
+                    required
+                  />
+                </div>
+                
+                <div className="host-form-group">
+                  <label>TIME</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. 6:30 PM"
+                    value={newEvent.time}
+                    onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="host-form-grid">
+                <div className="host-form-group">
+                  <label>EXACT VENUE / LOCATION</label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Third Wave Coffee, KP"
+                    value={newEvent.location}
+                    onChange={(e) => setNewEvent({ ...newEvent, location: e.target.value })}
+                    required
+                  />
+                </div>
+                
+                <div className="host-form-group">
+                  <label>MAX SPOTS AVAILABLE</label>
+                  <input 
+                    type="number" 
+                    min="2"
+                    max="100"
+                    value={newEvent.spotsTotal}
+                    onChange={(e) => setNewEvent({ ...newEvent, spotsTotal: parseInt(e.target.value) || 20 })}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="host-form-group full-width" style={{ marginBottom: '16px' }}>
+                <label>PRICE (Optional)</label>
+                <input 
+                  type="text" 
+                  placeholder="e.g. Free or ₹200 for coffee"
+                  value={newEvent.price}
+                  onChange={(e) => setNewEvent({ ...newEvent, price: e.target.value })}
+                />
+              </div>
+
+              <div className="host-form-group full-width" style={{ marginBottom: '16px' }}>
+                <label>DESCRIPTION</label>
+                <textarea 
+                  placeholder="Tell people what this gathering is about, who should join, and what you will do."
+                  rows="3"
+                  value={newEvent.description}
+                  onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
+                  required
+                />
+              </div>
+
+              <button type="submit" className="host-submit-btn">
+                LAUNCH GATHERING 🚀
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Download App Drawer / Glassmorphic Modal Overlay */}
       {showWaitlist && (
